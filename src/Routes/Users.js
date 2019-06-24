@@ -2,6 +2,7 @@ const User = require("../Schemas/User");
 
 module.exports = app => {
   app.get("/users", (req, res, next) => {
+    console.log("getting users from db");
     User.find()
       .exec()
       .then(user => res.json(user))

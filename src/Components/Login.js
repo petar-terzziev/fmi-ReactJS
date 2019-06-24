@@ -2,15 +2,11 @@ import React, { Component } from "react";
 //const User = require("../Schemas/User");
 //const mongoose = require("mongoose");
 
-class Register extends Component {
+class Login extends Component {
   state = {
     username: "",
-    email: "",
-    password: ""
-  };
-
-  handleEmail = e => {
-    this.setState({ email: e.target.value });
+    password: "",
+    notFound: false
   };
 
   handlePassword = e => {
@@ -22,16 +18,17 @@ class Register extends Component {
   };
 
   handleClick = e => {
-    fetch("/api/register", {
+    fetch("/api/login", {
       method: "POST",
       body: JSON.stringify(this.state),
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
       }
-    })
-      .then(res => res.json())
-      .then(json => console.log(JSON.stringify(json)));
+    }).then(res => {
+      if (res.status === 404) this.setState({ notFound: true });
+      else this.setState({ notFound: false });
+    });
   };
   render() {
     return (
@@ -42,10 +39,6 @@ class Register extends Component {
           <input name="username" onChange={this.handleUsername} />
         </div>
         <div>
-          <label>Email: </label>
-          <input name="email" onChange={this.handleEmail} />
-        </div>
-        <div>
           <label>Password: </label>
           <input
             type="password"
@@ -53,10 +46,11 @@ class Register extends Component {
             onChange={this.handlePassword}
           />
         </div>
-        <button onClick={this.handleClick}>Register</button>
+        <button onClick={this.handleClick}>Login</button>
+        <div>{this.state.notFound ? "Wrong username or password!" : null}</div>
       </div>
     );
   }
 }
 
-export default Register;
+export default Login;
