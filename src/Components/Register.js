@@ -22,6 +22,7 @@ class Register extends Component {
   };
 
   handleClick = e => {
+    e.preventDefault();
     fetch("/api/register", {
       method: "POST",
       body: JSON.stringify(this.state),
@@ -35,7 +36,7 @@ class Register extends Component {
   };
   render() {
     return (
-      <div>
+      <form>
         <div>
           {" "}
           <label>Username: </label>
@@ -54,7 +55,7 @@ class Register extends Component {
           />
         </div>
         <button onClick={this.handleClick}>Register</button>
-      </div>
+      </form>
     );
   }
 }

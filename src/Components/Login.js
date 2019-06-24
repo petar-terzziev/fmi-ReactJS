@@ -6,7 +6,8 @@ class Login extends Component {
   state = {
     username: "",
     password: "",
-    notFound: false
+    status: "",
+    loggedIn: false
   };
 
   handlePassword = e => {
@@ -18,6 +19,7 @@ class Login extends Component {
   };
 
   handleClick = e => {
+    e.preventDefault();
     fetch("/api/login", {
       method: "POST",
       body: JSON.stringify(this.state),
@@ -26,13 +28,14 @@ class Login extends Component {
         "Content-Type": "application/json"
       }
     }).then(res => {
-      if (res.status === 404) this.setState({ notFound: true });
-      else this.setState({ notFound: false });
+      if (res.status === 404)
+        this.setState({ status: "Wrong username or password!" });
+      else this.setState({ status: "You are now logged in!", loggedIn: true });
     });
   };
   render() {
     return (
-      <div>
+      <form>
         <div>
           {" "}
           <label>Username: </label>
@@ -47,8 +50,8 @@ class Login extends Component {
           />
         </div>
         <button onClick={this.handleClick}>Login</button>
-        <div>{this.state.notFound ? "Wrong username or password!" : null}</div>
-      </div>
+        <div>{this.state.status}</div>
+      </form>
     );
   }
 }

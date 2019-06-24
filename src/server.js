@@ -2,12 +2,15 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const path = require("path");
+const session = require("express-session");
 const port = 8080;
 const User = require("./Schemas/User");
 
 mongoose.connect("mongodb://localhost/users", { useNewUrlParser: true });
+mongoose.set("useCreateIndex", true);
 const app = express();
 app.use(bodyParser.json());
+app.use(session({ secret: "secret", resave: true, saveUninitialized: false }));
 //require("./Routes/Users")(app);
 //app.use(express.static(__dirname));
 
@@ -27,20 +30,32 @@ app.post("/api/register", (req, res, next) => {
     type: "normal",
     banned: false
   });
-  user.save();
+  user.save((err, user) => {
+    if (err) {
+      res.status(505).json({ message: err });
+    } else res.status(201).json(user);
+  });
 });
 
 app.post("/api/login", (req, res, next) => {
   ({ username, password } = req.body);
   User.findOne({ username }, "username password", (err, user) => {
-    if (user) {
-      res.status(200);
-      res.end();
+    if (user && user.password === password) {
+      req.session.userId = user._id;
+      res.status(200).end();
     } else {
-      res.status(404);
-      res.end();
+      res.status(404).end();
     }
   });
+});
+
+app.get("/api/login", (req, res, next) => {
+  console.log(req.session.userId);
+  if (req.session.userId) {
+    User.findById(req.session.userId, (err, user) => {
+      res.json({ username: user.username, email: user.email });
+    });
+  } else res.json({ error: "You need to login first!" });
 });
 
 app.get("/api/forums", (req, res, next) => {
