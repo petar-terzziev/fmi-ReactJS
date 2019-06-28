@@ -10,15 +10,7 @@ class Categories extends React.Component {
     };
   }
 
-  componentWillMount() {
-    this.fetchCategories();
-  }
 
-  fetchCategories() {
-    fetch("/api/forums")
-      .then(data => data.json())
-      .then(forums => this.setState(forums));
-  }
 
   render() {
     return (
@@ -45,5 +37,6 @@ class Categories extends React.Component {
     );
   }
 }
+
 
 export default Categories;
