@@ -1,21 +1,18 @@
-import React from 'react';
-import isRegistered from '../isRegistered'
-import { Route, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import React from "react";
+import isRegistered from "../isRegistered";
+import { Route, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
-const PrivateRoute = ({ component: Component, auth, ...rest }) => (
+const PrivateRoute = ({ component: Component, auth, ...rest }) => {
+  console.log(`rendering ${Component}`);
   <Route
     {...rest}
     render={props =>
-      isRegistered(auth) ? (
-        <Component {...props} />
-      ) : (
-        <Redirect to="/login" />
-      )
+      isRegistered(auth) ? <Component {...props} /> : <Redirect to="/login" />
     }
-  />
-);
+  />;
+};
 
 PrivateRoute.propTypes = {
   auth: PropTypes.object.isRequired

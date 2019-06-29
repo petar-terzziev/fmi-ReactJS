@@ -1,10 +1,9 @@
-
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { logoutUser } from '.././actions/authActions';
-import { isRegistered } from '../isRegistered';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { logoutUser } from ".././actions/authActions";
+import { isRegistered } from "../isRegistered";
 
 class Navbar extends Component {
   onLogoutClick(e) {
@@ -17,23 +16,25 @@ class Navbar extends Component {
 
     const authLinks = (
       <ul className="navbar-nav ml-auto">
-
-
-        <li className="nav-item">
+        <div className="nav-item">
           <a
             href=""
             onClick={this.onLogoutClick.bind(this)}
             className="nav-link"
           >
-        
             Logout
           </a>
           <li className="nav-item">
-          <Link className="nav-link" to="/profile:id">
-            My Profile
-          </Link>
-        </li>
-        </li>
+            <Link className="nav-link" to="/profile">
+              My Profile
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/categories">
+              Categories
+            </Link>
+          </li>
+        </div>
       </ul>
     );
 
@@ -60,21 +61,11 @@ class Navbar extends Component {
     return (
       <nav className="navbar navbar-dark bg-dark mb-4">
         <div className="container">
-        <i className="fas fa-cogs"></i>
+          <i className="fas fa-cogs" />
           <Link className="navbar-brand" to="/">
             TechForum
           </Link>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#mobile-nav"
-          >
-            <span className="navbar-toggler-icon" />
-          </button>
-
           <div className="collapse navbar-collapse" id="mobile-nav">
-
             {isRegistered(state_auth) ? authLinks : guestLinks}
           </div>
         </div>
@@ -92,6 +83,7 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { logoutUser})(
-  Navbar
-);
+export default connect(
+  mapStateToProps,
+  { logoutUser }
+)(Navbar);

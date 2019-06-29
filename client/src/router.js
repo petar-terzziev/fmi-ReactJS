@@ -1,17 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Register from "./Components/Register";
+//import Register from "./Components/Register";
 import { BrowserRouter, Route } from "react-router-dom";
-import Header from "./Components/Header";
-import Categories from "./Components/Categories";
-import Category from "./Components/Category";
-import Login from "./Components/Login";
-import Profile from "./Components/Profile";
+import Header from "./components/Header";
+import Categories from "./components/Categories";
+import Category from "./components/Category";
+//import Login from "./Components/Login";
+import Profile from "./components/Profile";
 
 ReactDOM.render(
   <BrowserRouter>
     <Route path="/" component={Header} />
-    <Route path="/login" component={Login} />
+    <Route path="/loogin" component={Login} />
     <Route path="/register" component={Register} />
     <Route path="/profile" component={Profile} />
     <Route exact path="/categories" component={Categories} />
