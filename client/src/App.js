@@ -7,6 +7,7 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import Profile from "./components/Profile";
+import Subcategory from "./components/Subcategory";
 import Category from "./components/Category";
 import Categories from "./components/Categories";
 import jwt_decode from "jwt-decode";
@@ -31,6 +32,10 @@ class App extends Component {
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/categories" component={Categories} />
           <Route path="/categories/:category" component={Category} />
+          <Route
+            path="/categories/:category/:subcategory"
+            component={Subcategory}
+          />
         </Router>
       </Provider>
     );

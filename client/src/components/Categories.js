@@ -1,42 +1,49 @@
 import React from "react";
+import Category from "./Category";
+import Subcategory from "./Subcategory";
+import { connect } from "react-redux";
+import { isRegistered } from "../isRegistered";
+import { getCategories } from "../actions/categoryActions";
 import { Link } from "react-router-dom";
 
 class Categories extends React.Component {
   constructor() {
     super();
     this.state = {
-      software: [],
-      hardware: []
+      categories: ["Software", "Hardware"]
     };
   }
 
-
+  componentWillMount() {
+    this.props.getCategories();
+  }
 
   render() {
+    const adminActions = (
+      <button onClick={this.toggleTextbox}>New category</button>
+    );
+
     return (
       <div>
         <div>
-          Software:
-          {this.state.software.map((c, index) => (
+          {this.state.categories.map((c, index) => (
             <div key={index}>
-              <Link to={"categories/" + c}>{c}</Link>
-              &nbsp;
+              <li>{c}:</li>
+              <Category name={c} />
             </div>
           ))}
         </div>
-        <div>
-          Hardware:
-          {this.state.hardware.map((c, index) => (
-            <div key={index}>
-              <Link to={"categories/" + c}>{c}</Link>
-              &nbsp;
-            </div>
-          ))}
-        </div>
+        <div>{isRegistered(this.props.auth) ? adminActions : null}</div>
       </div>
     );
   }
 }
 
+const mapStateToProps = state => ({
+  auth: state.auth
+});
 
-export default Categories;
+export default connect(
+  mapStateToProps,
+  { getCategories }
+)(Categories);

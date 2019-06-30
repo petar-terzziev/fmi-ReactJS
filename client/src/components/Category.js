@@ -1,23 +1,40 @@
 import React from "react";
-import Thread from "./Thread";
+import Subcategory from "./Subcategory";
+import { connect } from "react-redux";
+import { isRegistered } from "../isRegistered";
+import { Link } from "react-router-dom";
 
 class Category extends React.Component {
   constructor() {
     super();
     this.state = {
-      threads: [
-        { title: "thread1", user: "user1", id: 0 },
-        { title: "thread2", user: "user2", id: 1 }
-      ]
+      subcategories: ["CPU", "GPU"]
     };
   }
-  //TODO: fetchThreads from db
 
   render() {
-    return this.state.threads.map((thread, index) => (
-      <Thread key={thread.id} title={thread.title} user={thread.user} />
-    ));
+    const adminActions = (
+      <button onClick={this.toggleTextbox}>New subcategory</button>
+    );
+
+    return (
+      <div>
+        <div>
+          {this.state.subcategories.map((c, index) => (
+            <div key={index}>
+              <li>{c}:</li>
+              <Subcategory />
+            </div>
+          ))}
+        </div>
+        <div>{isRegistered(this.props.auth) ? adminActions : null}</div>
+      </div>
+    );
   }
 }
 
-export default Category;
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps)(Category);
