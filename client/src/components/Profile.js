@@ -25,7 +25,7 @@ class Profile extends Component {
   render() {
     return (
       <div>
-        <h2>{this.state.username}</h2>
+        <h2>Hi, {this.state.username}</h2>
         <li>e-mail: {this.state.email}</li>
       </div>
     );

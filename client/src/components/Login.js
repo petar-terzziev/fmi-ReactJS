@@ -18,14 +18,14 @@ class Login extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    console.log(this.state.username);
-    console.log(this.props);
+    console.log(this.state);
     const userData = {
       username: this.state.username,
       password: this.state.password
     };
 
     this.props.loginUser(userData, this.props.history);
+    console.log("logged in");
   }
 
   onChange(e) {

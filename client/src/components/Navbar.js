@@ -7,12 +7,14 @@ import { isRegistered } from "../isRegistered";
 
 class Navbar extends Component {
   onLogoutClick(e) {
+    console.log(this.props);
     e.preventDefault();
-    this.props.logoutUser();
+    this.props.logoutUser(this.props.history);
   }
 
   render() {
     const state_auth = this.props.auth;
+    console.log("auth: ", state_auth);
 
     const authLinks = (
       <ul className="navbar-nav ml-auto">

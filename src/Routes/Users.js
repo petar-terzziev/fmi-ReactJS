@@ -42,7 +42,6 @@ router.post("/profile", (req, res) => {
 
 router.post("/login", (req, res) => {
   const { errors, isValid } = validatelogin(req.body);
-  console.log(req.body);
   // Check Validation
   if (!isValid) {
     return res.status(400).json(errors);
@@ -50,10 +49,10 @@ router.post("/login", (req, res) => {
 
   const username = req.body.username;
   const password = req.body.password;
-  console.log(req.body);
 
   // Find user by username
   User.findOne({ username }).then(user => {
+    console.log(user);
     // Check for user
     if (!user) {
       errors.username = "User not found";
@@ -69,7 +68,7 @@ router.post("/login", (req, res) => {
       jwt.sign(payload, key, { expiresIn: 3600 }, (err, token) => {
         res.json({
           success: true,
-          token: "Bearer " + token
+          token: token
         });
       });
     } else {
