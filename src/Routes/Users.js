@@ -46,13 +46,13 @@ router.post("/login", (req, res) => {
   if (!isValid) {
     return res.status(400).json(errors);
   }
-
+  console.log("posting user: ", req.body);
   const username = req.body.username;
   const password = req.body.password;
 
   // Find user by username
   User.findOne({ username }).then(user => {
-    console.log(user);
+    console.log("found user: ", user);
     // Check for user
     if (!user) {
       errors.username = "User not found";

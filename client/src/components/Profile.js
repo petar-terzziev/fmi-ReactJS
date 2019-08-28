@@ -11,7 +11,12 @@ class Profile extends Component {
       email: ""
     };
   }
-  componentWillMount() {
+
+  //first time getting profile returns null :hmm:
+  componentWillMount(newProps) {
+    this.props.getProfile(this.props.auth.user.id);
+  }
+  componentDidMount() {
     this.props.getProfile(this.props.auth.user.id);
     const profile = this.props.profile.profile;
     if (profile) {

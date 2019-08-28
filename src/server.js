@@ -3,14 +3,17 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const path = require("path");
 const session = require("express-session");
+const cors = require("cors");
 const port = 8000;
-const db1 = "mongodb://localhost/users";
+const db = "mongodb://localhost/users";
+
 mongoose
-  .connect(db1, { useNewUrlParser: true })
+  .connect(db, { useNewUrlParser: true })
   .then(() => {
-    console.log("success");
+    console.log("userdb: success");
   })
   .catch(err => console.log(err));
+
 const app = express();
 app.use(bodyParser.json());
 app.use(session({ secret: "secret", resave: true, saveUninitialized: false }));
@@ -19,7 +22,18 @@ app.use(session({ secret: "secret", resave: true, saveUninitialized: false }));
 const users = require("./Routes/Users.js");
 const profile = require("./Routes/Profile.js");
 
-// Add headers
+//app.use(cors());
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+
+//Add headers
 app.use(function(req, res, next) {
   // Website you wish to allow to connect
   res.setHeader("Access-Control-Allow-Origin", "*");

@@ -1,33 +1,53 @@
 import React from "react";
 import Subcategory from "./Subcategory";
+import SubmitForm from "./SubmitForm";
 import { connect } from "react-redux";
-import { isRegistered } from "../isRegistered";
-import { Link } from "react-router-dom";
+import { isAdmin } from "../userType";
+import { newSubcategory } from "../actions/categoryActions";
 
 class Category extends React.Component {
   constructor() {
     super();
     this.state = {
-      subcategories: ["CPU", "GPU"]
+      subcategories: [],
+      newSubcat: false
     };
   }
 
+  componentWillMount() {}
+
+  newSubcategory = () => {
+    this.setState({ newSubcat: !this.state.newSubcat });
+  };
+
+  handleForm = title => {
+    this.props.newSubcategory(title, this.props.name);
+    this.setState({ newSubcat: !this.state.newSubcat });
+  };
+
   render() {
     const adminActions = (
-      <button onClick={this.toggleTextbox}>New subcategory</button>
+      <div>
+        <button onClick={this.newSubcategory}>New subcategory</button>
+      </div>
     );
 
     return (
       <div>
+        <h1>{this.props.name}</h1>
         <div>
           {this.state.subcategories.map((c, index) => (
             <div key={index}>
-              <li>{c}:</li>
-              <Subcategory />
+              <Subcategory name={c} />
             </div>
           ))}
         </div>
-        <div>{isRegistered(this.props.auth) ? adminActions : null}</div>
+        <div>{isAdmin(this.props.auth) ? adminActions : null}</div>
+        <div>
+          {this.state.newSubcat ? (
+            <SubmitForm onSubmit={this.handleForm} />
+          ) : null}
+        </div>
       </div>
     );
   }
@@ -37,4 +57,7 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps)(Category);
+export default connect(
+  mapStateToProps,
+  { newSubcategory }
+)(Category);

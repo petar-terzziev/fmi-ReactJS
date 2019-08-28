@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from ".././actions/authActions";
-import { isRegistered } from "../isRegistered";
+import { isRegistered } from "../userType";
 
 class Navbar extends Component {
   onLogoutClick(e) {
@@ -14,7 +14,6 @@ class Navbar extends Component {
 
   render() {
     const state_auth = this.props.auth;
-    console.log("auth: ", state_auth);
 
     const authLinks = (
       <ul className="navbar-nav ml-auto">
