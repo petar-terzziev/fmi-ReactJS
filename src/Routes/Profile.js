@@ -4,9 +4,9 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/:id", (req, res) => {
+  console.log("finding profile");
   const id = req.params.id;
   User.findById(id).then(user => {
-    console.log(user);
     res.json(user);
   });
 });

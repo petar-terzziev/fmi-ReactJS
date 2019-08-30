@@ -9,7 +9,6 @@ const jwt = require("jsonwebtoken");
 router.post("/register", (req, res) => {
   const { errors, isValid } = validatereg(req.body);
   if (!isValid) {
-    console.log(isValid);
     return res.status(400).json(errors);
   } else {
     const newUser = User({

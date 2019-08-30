@@ -5,7 +5,7 @@ const path = require("path");
 const session = require("express-session");
 const cors = require("cors");
 const port = 8000;
-const db = "mongodb://localhost/users";
+const db = "mongodb://localhost/forum";
 
 mongoose
   .connect(db, { useNewUrlParser: true })
@@ -21,7 +21,7 @@ app.use(session({ secret: "secret", resave: true, saveUninitialized: false }));
 //app.use(express.static(__dirname));
 const users = require("./Routes/Users.js");
 const profile = require("./Routes/Profile.js");
-
+const subcategories = require("./Routes/Subcategories.js");
 //app.use(cors());
 
 app.use(function(req, res, next) {
@@ -57,6 +57,9 @@ app.use(function(req, res, next) {
   // Pass to next layer of middleware
   next();
 });
+
+app.use("/api/categories", subcategories);
+
 app.use("/api/users", users);
 
 app.use("/api/profile", profile);

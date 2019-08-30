@@ -5,13 +5,10 @@ import { GET_THREADS } from "./types";
 import { NEW_THREAD } from "./types";
 
 export const newSubcategory = (title, category) => dispatch => {
-  console.log("adding subcategory " + title + " in " + category);
-  axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
+  const data = { title, category };
   axios
-    .post(`localhost:8000/api/categories/${category}`, { title, category })
-    .then(res => {
-      console.log("added" + title);
-    })
+    .post(`http://localhost:8000/api/categories/${category}`, data)
+    .then(res => {})
     .catch(err =>
       dispatch({
         type: NEW_SUBCATEGORY,
@@ -23,12 +20,12 @@ export const newSubcategory = (title, category) => dispatch => {
 export const getSubcategories = handle => dispatch => {
   axios
     .get(`http://localhost:8000/api/categories/${handle}`)
-    .then(res =>
+    .then(res => {
       dispatch({
         type: GET_SUBCATEGORIES,
         payload: res.data
-      })
-    )
+      });
+    })
     .catch(err =>
       dispatch({
         type: GET_SUBCATEGORIES,

@@ -3,7 +3,7 @@ import Subcategory from "./Subcategory";
 import SubmitForm from "./SubmitForm";
 import { connect } from "react-redux";
 import { isAdmin } from "../userType";
-import { newSubcategory } from "../actions/categoryActions";
+import { newSubcategory, getSubcategories } from "../actions/categoryActions";
 
 class Category extends React.Component {
   constructor() {
@@ -14,7 +14,9 @@ class Category extends React.Component {
     };
   }
 
-  componentWillMount() {}
+  componentWillMount() {
+    this.props.getSubcategories(this.props.name);
+  }
 
   newSubcategory = () => {
     this.setState({ newSubcat: !this.state.newSubcat });
@@ -54,10 +56,11 @@ class Category extends React.Component {
 }
 
 const mapStateToProps = state => ({
+  subcategories: state.subcategories,
   auth: state.auth
 });
 
 export default connect(
   mapStateToProps,
-  { newSubcategory }
+  { newSubcategory, getSubcategories }
 )(Category);

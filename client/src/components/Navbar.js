@@ -7,7 +7,6 @@ import { isRegistered } from "../userType";
 
 class Navbar extends Component {
   onLogoutClick(e) {
-    console.log(this.props);
     e.preventDefault();
     this.props.logoutUser(this.props.history);
   }
