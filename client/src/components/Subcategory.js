@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { isRegistered } from "../userType";
 import { getProfile } from "../actions/profileActions";
 import { addSubcategory } from "../actions/categoryActions";
+import { getThreads, newThread } from "../actions/threadActions";
 
 class Subcategory extends React.Component {
   constructor() {
@@ -19,6 +20,7 @@ class Subcategory extends React.Component {
   //first time getting profile returns null :hmm:
   componentDidMount() {
     this.props.getProfile(this.props.auth.user.id);
+    this.retrieveThreads();
   }
   newThread = event => {
     this.setState({ newThread: !this.state.newThread });
@@ -27,17 +29,28 @@ class Subcategory extends React.Component {
   handleForm = title => {
     this.props.getProfile(this.props.auth.user.id);
     const profile = this.props.profile.profile;
-    console.log(profile);
     if (profile) {
-      let { threads } = this.state;
-      threads.push({
-        id: this.state.threads.length + 1,
-        title,
-        author: profile.username
-      });
-      this.setState({ threads });
+      // let { threads } = this.state;
+      // threads.push({
+      //   id: this.state.threads.length + 1,
+      //   title,
+      //   author: profile.username
+      // });
+      // this.setState({ threads });
+      this.props.newThread(title, profile.username, this.props.name);
+      this.newThread();
+      this.retrieveThreads();
     }
   };
+
+  retrieveThreads() {
+    this.props.getThreads(this.props.name);
+    const data = this.props.threads.threads.filter(
+      t => t.subcategory === this.props.name
+    );
+    console.log(data);
+    this.setState({ threads: data });
+  }
 
   render() {
     const userActions = (
@@ -75,10 +88,11 @@ class Subcategory extends React.Component {
 
 const mapStateToProps = state => ({
   profile: state.profile,
-  auth: state.auth
+  auth: state.auth,
+  threads: state.threads
 });
 
 export default connect(
   mapStateToProps,
-  { getProfile, addSubcategory }
+  { getProfile, addSubcategory, getThreads, newThread }
 )(Subcategory);

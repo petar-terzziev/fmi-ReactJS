@@ -1,15 +1,16 @@
-import { GET_SUBCATEGORIES } from "../actions/types";
+import { GET_THREADS } from "../actions/types";
 
 const initialState = {
-  subcategories: []
+  threads: []
 };
 
 export default function(state = initialState, action) {
+  //console.log(action.payload);
   switch (action.type) {
-    case GET_SUBCATEGORIES:
+    case GET_THREADS:
       return {
         ...state,
-        subcategories: action.payload
+        threads: action.payload
       };
     default:
       return state;

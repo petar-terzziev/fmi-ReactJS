@@ -16,6 +16,10 @@ class Category extends React.Component {
 
   componentWillMount() {
     this.props.getSubcategories(this.props.name);
+    let subcategories = this.props.subcategories.subcategories
+      .filter(c => c.category === this.props.name)
+      .map(c => c.name);
+    this.setState({ subcategories: subcategories });
   }
 
   newSubcategory = () => {

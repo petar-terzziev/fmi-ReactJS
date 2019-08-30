@@ -15,9 +15,11 @@ router.post("/:category", (req, res) => {
 });
 
 router.get("/:category", (req, res) => {
-  Subcategory.find({ category: req.params.category }).then(data =>
-    res.json(data)
-  );
+  Subcategory.find().then(data => {
+    let subcategories = [];
+    data.map(c => subcategories.push({ name: c.name, category: c.category }));
+    res.json(subcategories);
+  });
 });
 
 module.exports = router;

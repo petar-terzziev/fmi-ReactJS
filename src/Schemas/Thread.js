@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
-const mongoURI = "mongodb://localhost/test";
 const ThreadSchema = new mongoose.Schema({
   title: String,
-  author: ObjectId,
+  author: String,
+  content: String,
   subcategory: String
 });
 

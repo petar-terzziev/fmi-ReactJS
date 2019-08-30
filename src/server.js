@@ -22,6 +22,7 @@ app.use(session({ secret: "secret", resave: true, saveUninitialized: false }));
 const users = require("./Routes/Users.js");
 const profile = require("./Routes/Profile.js");
 const subcategories = require("./Routes/Subcategories.js");
+const threads = require("./Routes/Threads.js");
 //app.use(cors());
 
 app.use(function(req, res, next) {
@@ -57,6 +58,8 @@ app.use(function(req, res, next) {
   // Pass to next layer of middleware
   next();
 });
+
+app.use("/api/threads", threads);
 
 app.use("/api/categories", subcategories);
 
