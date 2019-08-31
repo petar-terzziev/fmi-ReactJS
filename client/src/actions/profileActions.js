@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { GET_PROFILE } from "./types";
+import { GET_PROFILE, GET_ERRORS } from "./types";
 
 export const getProfile = handle => dispatch => {
   axios
@@ -18,3 +18,20 @@ export const getProfile = handle => dispatch => {
       })
     );
 };
+
+export const editprofil = (profileData,id,history) => dispatch => {
+  console.log(profileData);
+  axios
+    .post(`http://localhost:8000/api/profile/edit/${id}`, profileData, {
+      headers: { 'content-type': 'multipart/form-data' },
+  })
+    .then(res => history.push('/profile'))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+
