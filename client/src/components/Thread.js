@@ -1,5 +1,7 @@
 import React from "react";
-//import Comment from "./Comment";
+import PropTypes from "prop-types";
+import { isRegistered } from "../userType";
+import { connect } from "react-redux";
 import SubmitForm from "./SubmitForm";
 
 class Thread extends React.Component {
@@ -8,15 +10,15 @@ class Thread extends React.Component {
     this.state = {
       id: -1,
       comments: [],
-      newComment: ""
+      content: ""
     };
   }
 
-  componentWillMount() {
-    const url = "/api/forums/" + this.state.id;
-    fetch(url)
-      .then(data => data.json())
-      .then(comments => this.setState({ comments }));
+  componentDidMount() {}
+
+  getId() {
+    const id = this.props.match.params.threadid;
+    this.setState({ id });
   }
 
   onSubmit = event => {
@@ -31,20 +33,33 @@ class Thread extends React.Component {
   };
 
   render() {
+    const userActions = (
+      <SubmitForm
+        onSubmit={this.onSubmit}
+        onChange={this.handleChange}
+        value={this.state.newComment}
+      />
+    );
     return (
       <div>
-        {this.props.user}: {this.props.title}
+        <h1>{this.state.id}</h1>
         {this.state.comments.map((comment, index) => (
           <div key={index}>{comment}</div>
         ))}
-        <SubmitForm
-          onSubmit={this.onSubmit}
-          onChange={this.handleChange}
-          value={this.state.newComment}
-        />
+        {isRegistered(this.props.auth) ? userActions : null}
       </div>
     );
   }
 }
 
-export default Thread;
+Thread.propTypes = {
+  auth: PropTypes.object.isRequired,
+  thread: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+  thread: state.thread
+});
+
+export default connect(mapStateToProps)(Thread);

@@ -1,5 +1,5 @@
 import React from "react";
-import Subcategory from "./Subcategory";
+import { Link } from "react-router-dom";
 import SubmitForm from "./SubmitForm";
 import { connect } from "react-redux";
 import { isAdmin } from "../userType";
@@ -16,7 +16,17 @@ class Category extends React.Component {
 
   componentWillMount() {
     this.props.getSubcategories(this.props.name);
-    let subcategories = this.props.subcategories.subcategories
+    this.retrieveSubcategories(this.props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.subcategories.subcategories) {
+      this.retrieveSubcategories(nextProps);
+    }
+  }
+
+  retrieveSubcategories(props) {
+    let subcategories = props.subcategories.subcategories
       .filter(c => c.category === this.props.name)
       .map(c => c.name);
     this.setState({ subcategories: subcategories });
@@ -29,6 +39,8 @@ class Category extends React.Component {
   handleForm = title => {
     this.props.newSubcategory(title, this.props.name);
     this.setState({ newSubcat: !this.state.newSubcat });
+    this.props.getSubcategories(this.props.name);
+    this.retrieveSubcategories(this.props);
   };
 
   render() {
@@ -43,9 +55,9 @@ class Category extends React.Component {
         <h1>{this.props.name}</h1>
         <div>
           {this.state.subcategories.map((c, index) => (
-            <div key={index}>
-              <Subcategory name={c} />
-            </div>
+            <h2 key={index}>
+              <Link to={`/categories/${this.props.name}/${c}`}>{c}</Link>
+            </h2>
           ))}
         </div>
         <div>{isAdmin(this.props.auth) ? adminActions : null}</div>

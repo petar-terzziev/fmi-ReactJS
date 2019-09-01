@@ -21,6 +21,7 @@ router.get("/:subcategory", (req, res) => {
     let threads = [];
     data.map(c =>
       threads.push({
+        id: c.id,
         title: c.title,
         author: c.author,
         subcategory: c.subcategory

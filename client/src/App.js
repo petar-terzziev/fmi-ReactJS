@@ -11,6 +11,7 @@ import EditProfile from "./components/EditProfile";
 import Subcategory from "./components/Subcategory";
 import Category from "./components/Category";
 import Categories from "./components/Categories";
+import Thread from "./components/Thread";
 import jwt_decode from "jwt-decode";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
 import "./App.css";
@@ -18,7 +19,7 @@ import "./App.css";
 import setAuthToken from "./setAuthToken";
 
 // Check for token
-if (localStorage.jwtToken && localStorage.jwtToken !== 'undefined') {
+if (localStorage.jwtToken && localStorage.jwtToken !== "undefined") {
   // Set auth token header auth
   setAuthToken(localStorage.jwtToken);
   // Decode token and get user info and exp
@@ -31,9 +32,9 @@ if (localStorage.jwtToken && localStorage.jwtToken !== 'undefined') {
   if (decoded.exp < currentTime) {
     // Logout user
     store.dispatch(logoutUser());
-  
+
     // Redirect to login
-    window.location.href = '/';
+    window.location.href = "/";
   }
 }
 
@@ -48,11 +49,13 @@ class App extends Component {
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/categories" component={Categories} />
           <Route exact path="/editprofile" component={EditProfile} />
-          <Route path="/categories/:category" component={Category} />
+          <Route exact path="/categories/:category" component={Category} />
           <Route
+            exact
             path="/categories/:category/:subcategory"
             component={Subcategory}
           />
+          <Route path="/thread/:threadid" component={Thread} />
         </Router>
       </Provider>
     );

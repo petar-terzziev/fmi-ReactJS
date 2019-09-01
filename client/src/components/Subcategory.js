@@ -8,20 +8,35 @@ import { addSubcategory } from "../actions/categoryActions";
 import { getThreads, newThread } from "../actions/threadActions";
 
 class Subcategory extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
+      title: this.props.match.params.subcategory,
       threads: [],
-      newThread: false,
-      currUser: ""
+      newThread: false
     };
   }
 
-  //first time getting profile returns null :hmm:
   componentDidMount() {
+    console.log("in Subcategory");
     this.props.getProfile(this.props.auth.user.id);
-    this.retrieveThreads();
+    this.props.getThreads(this.props.name);
+    this.retrieveThreads(this.props);
   }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.threads.threads) {
+      this.retrieveThreads(nextProps);
+    }
+  }
+
+  retrieveThreads(props) {
+    const data = props.threads.threads.filter(
+      t => t.subcategory === this.state.title
+    );
+    this.setState({ threads: data });
+  }
+
   newThread = event => {
     this.setState({ newThread: !this.state.newThread });
   };
@@ -30,27 +45,12 @@ class Subcategory extends React.Component {
     this.props.getProfile(this.props.auth.user.id);
     const profile = this.props.profile.profile;
     if (profile) {
-      // let { threads } = this.state;
-      // threads.push({
-      //   id: this.state.threads.length + 1,
-      //   title,
-      //   author: profile.username
-      // });
-      // this.setState({ threads });
       this.props.newThread(title, profile.username, this.props.name);
       this.newThread();
-      this.retrieveThreads();
+      this.props.getThreads(this.props.name);
+      this.retrieveThreads(this.props);
     }
   };
-
-  retrieveThreads() {
-    this.props.getThreads(this.props.name);
-    const data = this.props.threads.threads.filter(
-      t => t.subcategory === this.props.name
-    );
-    console.log(data);
-    this.setState({ threads: data });
-  }
 
   render() {
     const userActions = (
@@ -61,12 +61,12 @@ class Subcategory extends React.Component {
 
     return (
       <div>
-        <h2>{this.props.name}</h2>
+        <h1>{this.state.title}</h1>
         <div>
           {this.state.threads.map((thread, index) => (
             <div key={index}>
               <div>
-                <Link to={`/threads/${thread.id}`}>{thread.title}</Link>
+                <Link to={`/thread/${thread.id}`}>{thread.title}</Link>
                 {" by "}
                 <Link to={`/profile/${thread.author}`}>{thread.author}</Link>
               </div>
@@ -77,7 +77,7 @@ class Subcategory extends React.Component {
         <div>
           {this.state.newThread ? (
             <div>
-              <SubmitForm onSubmit={this.handleForm} />
+              <SubmitForm name="title" onSubmit={this.handleForm} />
             </div>
           ) : null}
         </div>
