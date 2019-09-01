@@ -3,7 +3,6 @@ const router = express.Router();
 const Thread = require("../Schemas/Thread");
 
 router.post("/:subcategory", (req, res) => {
-  console.log(req.body);
   const newThread = Thread({
     title: req.body.title,
     author: req.body.author,

@@ -18,7 +18,6 @@ router.post("/:id", (req, res) => {
 
 router.get("/:id", (req, res) => {
   Thread.findOne({ _id: req.params.id }).then(data => {
-    console.log(data);
     res.json({ title: data.title, content: data.content });
   });
 });

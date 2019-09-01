@@ -10,3 +10,5 @@ export const ADD_SUBCATEGORY = "ADD_SUBCATEGORY";
 export const GET_SUBCATEGORIES = "GET_SUBCATEGORIES";
 export const GET_THREADS = "GET_THREADS";
 export const GET_THREAD = "GET_THREAD";
+export const NEW_COMMENT = "NEW_COMMENT";
+export const GET_COMMENTS = "GET_COMMENTS";

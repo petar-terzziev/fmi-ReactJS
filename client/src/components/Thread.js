@@ -1,16 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import { isRegistered } from "../userType";
 import { connect } from "react-redux";
-import { getThread } from "../actions/threadActions";
+import { getThread, newComment, getComments } from "../actions/threadActions";
 
 class Thread extends React.Component {
   constructor() {
     super();
     this.state = {
-      title: "",
-      comments: [],
-      content: "",
       newComment: false,
       newCommentValue: ""
     };
@@ -19,23 +17,23 @@ class Thread extends React.Component {
   componentWillMount() {
     const id = this.props.match.params.threadid;
     this.props.getThread(id);
-    const { title, content } = this.props.thread.thread;
-    this.setState({ title, content });
+    this.props.getComments(id);
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log("componentWillReceiveProps");
     if (nextProps.thread.thread) {
-      const { title, content } = nextProps.thread.thread;
-      this.setState({ title, content });
+      //const { title, content } = nextProps.thread;
     }
   }
 
   onSubmit = event => {
     event.preventDefault();
-    let comments = this.state.comments;
-    comments.push(this.state.newCommentValue);
-    this.setState({ comments, newCommentValue: "" });
+    const thread_id = this.props.match.params.threadid;
+    const author_id = this.props.auth.user.id;
+    this.props.newComment(author_id, thread_id, this.state.newCommentValue);
     this.toggleReply();
+    this.props.getComments(thread_id);
   };
 
   toggleReply = value => {
@@ -53,6 +51,8 @@ class Thread extends React.Component {
       </div>
     );
 
+    console.log(this.props.thread.comments);
+
     const textArea = (
       <form onSubmit={this.onSubmit}>
         <textarea
@@ -67,11 +67,14 @@ class Thread extends React.Component {
     return (
       <div>
         <div>
-          <h1>{this.state.title}</h1>
-          <p>{this.state.content}</p>
+          <h1>{this.props.thread.title}</h1>
+          <p>{this.props.thread.content}</p>
         </div>
-        {this.state.comments.map((comment, index) => (
-          <div key={index}>{comment}</div>
+        {this.props.thread.comments.map((comment, index) => (
+          <div key={index}>
+            {comment.content} by{" "}
+            <Link to={`/profile/${comment.author}`}>{comment.author}</Link>
+          </div>
         ))}
         {isRegistered(this.props.auth) ? userActions : null}
         {this.state.newComment ? textArea : null}
@@ -91,5 +94,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getThread }
+  { getThread, newComment, getComments }
 )(Thread);
