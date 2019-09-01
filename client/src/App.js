@@ -12,6 +12,7 @@ import Subcategory from "./components/Subcategory";
 import Category from "./components/Category";
 import Categories from "./components/Categories";
 import Thread from "./components/Thread";
+import newThread from "./components/newThread";
 import jwt_decode from "jwt-decode";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
 import "./App.css";
@@ -55,7 +56,11 @@ class App extends Component {
             path="/categories/:category/:subcategory"
             component={Subcategory}
           />
-          <Route path="/thread/:threadid" component={Thread} />
+          <Route exact path="/thread/:threadid" component={Thread} />
+          <Route
+            path="/categories/:category/:subcategory/new"
+            component={newThread}
+          />
         </Router>
       </Provider>
     );

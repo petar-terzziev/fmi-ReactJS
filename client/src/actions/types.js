@@ -9,3 +9,4 @@ export const GET_PROFILES = "GET_PROFILES";
 export const ADD_SUBCATEGORY = "ADD_SUBCATEGORY";
 export const GET_SUBCATEGORIES = "GET_SUBCATEGORIES";
 export const GET_THREADS = "GET_THREADS";
+export const GET_THREAD = "GET_THREAD";

@@ -1,15 +1,15 @@
-import { GET_THREAD } from "../actions/types";
+import { GET_THREADS } from "../actions/types";
 
 const initialState = {
-  thread: []
+  threads: []
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case GET_THREAD:
+    case GET_THREADS:
       return {
         ...state,
-        thread: action.payload
+        threads: action.payload
       };
     default:
       return state;

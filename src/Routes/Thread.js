@@ -2,8 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Thread = require("../Schemas/Thread");
 
-router.post("/:subcategory", (req, res) => {
-  console.log(req.body);
+router.post("/:id", (req, res) => {
   const newThread = Thread({
     title: req.body.title,
     author: req.body.author,
@@ -17,18 +16,10 @@ router.post("/:subcategory", (req, res) => {
     .catch(err => console.log(err));
 });
 
-router.get("/:subcategory", (req, res) => {
-  Thread.find().then(data => {
-    let threads = [];
-    data.map(c =>
-      threads.push({
-        id: c.id,
-        title: c.title,
-        author: c.author,
-        subcategory: c.subcategory
-      })
-    );
-    res.json(threads);
+router.get("/:id", (req, res) => {
+  Thread.findOne({ _id: req.params.id }).then(data => {
+    console.log(data);
+    res.json({ title: data.title, content: data.content });
   });
 });
 

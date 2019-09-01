@@ -2,59 +2,86 @@ import React from "react";
 import PropTypes from "prop-types";
 import { isRegistered } from "../userType";
 import { connect } from "react-redux";
-import SubmitForm from "./SubmitForm";
+import { getThread } from "../actions/threadActions";
 
 class Thread extends React.Component {
   constructor() {
     super();
     this.state = {
-      id: -1,
+      title: "",
       comments: [],
-      content: ""
+      content: "",
+      newComment: false,
+      newCommentValue: ""
     };
   }
 
-  componentDidMount() {}
-
-  getId() {
+  componentWillMount() {
     const id = this.props.match.params.threadid;
-    this.setState({ id });
+    this.props.getThread(id);
+    const { title, content } = this.props.thread.thread;
+    this.setState({ title, content });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.thread.thread) {
+      const { title, content } = nextProps.thread.thread;
+      this.setState({ title, content });
+    }
   }
 
   onSubmit = event => {
     event.preventDefault();
     let comments = this.state.comments;
-    comments.push(this.state.newComment);
-    this.setState({ comments, newComment: "" });
+    comments.push(this.state.newCommentValue);
+    this.setState({ comments, newCommentValue: "" });
+    this.toggleReply();
   };
 
-  handleChange = value => {
-    this.setState({ newComment: value });
+  toggleReply = value => {
+    this.setState({ newComment: !this.state.newComment });
+  };
+
+  onChange = event => {
+    this.setState({ newCommentValue: event.target.value });
   };
 
   render() {
     const userActions = (
-      <SubmitForm
-        onSubmit={this.onSubmit}
-        onChange={this.handleChange}
-        value={this.state.newComment}
-      />
+      <div>
+        <button onClick={this.toggleReply}>Reply</button>
+      </div>
+    );
+
+    const textArea = (
+      <form onSubmit={this.onSubmit}>
+        <textarea
+          type="text"
+          name="content"
+          value={this.state.newCommentValue}
+          onChange={this.onChange}
+        />
+        <input type="submit" value="Submit" />
+      </form>
     );
     return (
       <div>
-        <h1>{this.state.id}</h1>
+        <div>
+          <h1>{this.state.title}</h1>
+          <p>{this.state.content}</p>
+        </div>
         {this.state.comments.map((comment, index) => (
           <div key={index}>{comment}</div>
         ))}
         {isRegistered(this.props.auth) ? userActions : null}
+        {this.state.newComment ? textArea : null}
       </div>
     );
   }
 }
 
 Thread.propTypes = {
-  auth: PropTypes.object.isRequired,
-  thread: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -62,4 +89,7 @@ const mapStateToProps = state => ({
   thread: state.thread
 });
 
-export default connect(mapStateToProps)(Thread);
+export default connect(
+  mapStateToProps,
+  { getThread }
+)(Thread);

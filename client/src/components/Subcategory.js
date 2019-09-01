@@ -1,5 +1,4 @@
 import React from "react";
-import SubmitForm from "./SubmitForm";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { isRegistered } from "../userType";
@@ -17,8 +16,7 @@ class Subcategory extends React.Component {
     };
   }
 
-  componentDidMount() {
-    console.log("in Subcategory");
+  componentWillMount() {
     this.props.getProfile(this.props.auth.user.id);
     this.props.getThreads(this.props.name);
     this.retrieveThreads(this.props);
@@ -39,6 +37,7 @@ class Subcategory extends React.Component {
 
   newThread = event => {
     this.setState({ newThread: !this.state.newThread });
+    this.props.history.push(this.props.location.pathname + "/new");
   };
 
   handleForm = title => {
@@ -75,13 +74,6 @@ class Subcategory extends React.Component {
           ))}
         </div>
         <div>{isRegistered(this.props.auth) ? userActions : null}</div>
-        <div>
-          {this.state.newThread ? (
-            <div>
-              <SubmitForm onSubmit={this.handleForm} />
-            </div>
-          ) : null}
-        </div>
       </div>
     );
   }

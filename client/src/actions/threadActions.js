@@ -1,6 +1,5 @@
 import axios from "axios";
-import { GET_THREADS } from "./types";
-import { NEW_THREAD } from "./types";
+import { GET_THREADS, GET_THREAD, NEW_THREAD } from "./types";
 
 export const getThreads = handle => dispatch => {
   axios
@@ -19,7 +18,7 @@ export const getThreads = handle => dispatch => {
     );
 };
 
-export const newThread = (title, author, subcategory) => dispatch => {
+export const newThread = (title, author, content, subcategory) => dispatch => {
   console.log(
     "adding thread " + title + " by " + author + " in " + subcategory
   );
@@ -28,6 +27,7 @@ export const newThread = (title, author, subcategory) => dispatch => {
     .post(`http://localhost:8000/api/threads/${subcategory}`, {
       title,
       author,
+      content,
       subcategory
     })
     .then(res => {
@@ -36,6 +36,23 @@ export const newThread = (title, author, subcategory) => dispatch => {
     .catch(err =>
       dispatch({
         type: NEW_THREAD,
+        payload: null
+      })
+    );
+};
+
+export const getThread = handle => dispatch => {
+  axios
+    .get(`http://localhost:8000/api/thread/${handle}`)
+    .then(res => {
+      dispatch({
+        type: GET_THREAD,
+        payload: res.data
+      });
+    })
+    .catch(err =>
+      dispatch({
+        type: GET_THREAD,
         payload: null
       })
     );
