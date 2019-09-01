@@ -42,10 +42,11 @@ class Subcategory extends React.Component {
   };
 
   handleForm = title => {
+    console.log(title);
     this.props.getProfile(this.props.auth.user.id);
     const profile = this.props.profile.profile;
     if (profile) {
-      this.props.newThread(title, profile.username, this.props.name);
+      this.props.newThread(title, profile.username, this.state.title);
       this.newThread();
       this.props.getThreads(this.props.name);
       this.retrieveThreads(this.props);
@@ -77,7 +78,7 @@ class Subcategory extends React.Component {
         <div>
           {this.state.newThread ? (
             <div>
-              <SubmitForm name="title" onSubmit={this.handleForm} />
+              <SubmitForm onSubmit={this.handleForm} />
             </div>
           ) : null}
         </div>
