@@ -25,7 +25,7 @@ class Navbar extends Component {
             Logout
           </a>
           <li className="nav-item">
-            <Link className="nav-link" to="/profile">
+            <Link className="nav-link" to={`/profile/${this.props.auth.user.name}`}>\
               My Profile
             </Link>
           </li>

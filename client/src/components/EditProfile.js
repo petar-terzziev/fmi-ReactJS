@@ -27,12 +27,12 @@ class EditProfile extends Component {
   onsubmit = e => {
     console.log(this.props.auth.user);
     const profileData = new FormData();
-    profileData.append("userid", this.props.auth.user.id);
+    profileData.append("username", this.props.auth.user.name);
     profileData.append("descr", this.state.descr);
     profileData.append("photo", e[0]);
     this.props.editprofil(
       profileData,
-      this.props.auth.user.id,
+      this.props.auth.user.name,
       this.props.history
     );
   };

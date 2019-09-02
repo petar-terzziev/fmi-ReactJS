@@ -16,9 +16,10 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.auth.user.id);
-    this.props.getProfile(this.props.auth.user.id);
+    console.log("ok ok ok");
+    this.props.getProfile(this.props.match.params.username);
     const profile = this.props.profile.profile;
+    console.log(profile);
     if (profile) {
     }
   }
@@ -49,7 +50,9 @@ class Profile extends Component {
         )}
         <li>e-mail: {this.state.email}</li>
         <p>About me: {this.state.descr}</p>
+        { (this.props.match.params.name===this.props.auth.user.name) &&(
         <Link to="/editprofile"> Edit Profile</Link>
+        )}
       </div>
     );
   }

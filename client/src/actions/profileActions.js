@@ -19,10 +19,10 @@ export const getProfile = handle => dispatch => {
     );
 };
 
-export const editprofil = (profileData,id,history) => dispatch => {
+export const editprofil = (profileData,username,history) => dispatch => {
   console.log(profileData);
   axios
-    .post(`http://localhost:8000/api/profile/edit/${id}`, profileData, {
+    .post(`http://localhost:8000/api/profile/edit/${username}`, profileData, {
       headers: { 'content-type': 'multipart/form-data' },
   })
     .then(res => history.push('/profile'))

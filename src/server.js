@@ -5,10 +5,10 @@ const path = require("path");
 const session = require("express-session");
 const cors = require("cors");
 const port = 8000;
-const db = "mongodb://localhost/forum";
-//const db1= "mongodb+srv://chovek:12345@cluster0-6wcmh.mongodb.net/test?retryWrites=true&w=majority";
+//const db = "mongodb://localhost/forum";
+const db1= "mongodb+srv://chovek:12345@cluster0-6wcmh.mongodb.net/test?retryWrites=true&w=majority";
 mongoose
-  .connect(db, { useNewUrlParser: true })
+  .connect(db1, { useNewUrlParser: true })
   .then(() => {
     console.log("success");
   })

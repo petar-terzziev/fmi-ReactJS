@@ -1,9 +1,26 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
+
+import Container from '@material-ui/core/Container';
+
 import { connect } from "react-redux";
 import { loginUser } from ".././actions/authActions";
 //const User = require("../Schemas/User");
 //const mongoose = require("mongoose");
+
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+  }
+});
+
 
 class Login extends Component {
   constructor() {
@@ -31,61 +48,73 @@ class Login extends Component {
   }
 
   render() {
+    const {classes} = this.props;
     return (
-      <div className="login">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Log In</h1>
-              <p className="lead text-center">Sign in to your account</p>
-              <div className=" text-center">
-                <div className="col col-sm-6 col-md-8 col-lg-4 col-xl-3">
-                  <form className="form-inline justify-content-center">
-                    <div>
-                      {" "}
-                      <label>Username: </label>
-                      <input
-                        name="username"
-                        value={this.state.username}
-                        onChange={this.onChange}
-                        className="form-control"
-                      />
-                    </div>
-                    <div>
-                      <label>Password: </label>
-                      <input
-                        type="password"
-                        name="password"
-                        value={this.state.password}
-                        onChange={this.onChange}
-                        className="form-control"
-                      />
-                    </div>
-                    <button
-                      onClick={this.onSubmit}
-                      className="justify-content-center"
-                    >
-                      Login
-                    </button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+    
+      <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <div className={classes.paper}>
+        <Typography component="h1" variant="h5">
+          Sign in
+        </Typography>
+        <form className={classes.form} noValidate>
+          <Grid>
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="username"
+            label="Username"
+            name="username"
+            autoComplete="username"
+            value = {this.state.username}
+            onChange = {this.onChange}
+            autoFocus
+          />
+          <TextField
+            variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+               type="password"
+              id="password"
+              value = {this.state.password}
+              onChange = {this.onChange}
+              autoComplete="current-password"
+          />
+        
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            onClick = {this.onSubmit}
+          >
+            Sign In
+          </Button>
+          </Grid>
+        </form>
       </div>
+    </Container>
     );
   }
 }
 
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  classes : PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   auth: state.auth
 });
+
+Login = withStyles(styles)(Login);
 
 export default connect(
   mapStateToProps,

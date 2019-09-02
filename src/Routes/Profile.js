@@ -14,9 +14,9 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-router.get("/:id", (req, res) => {
-  const id = req.params.id;
-  User.findById(id).then(user => {
+router.get("/:username", (req, res) => {
+  const username = req.params.username;
+  User.findOne({"username": username}).then(user => {
     res.json(user);
   });
 });

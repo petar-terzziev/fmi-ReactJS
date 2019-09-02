@@ -47,7 +47,7 @@ class App extends Component {
           <Route path="" component={Navbar} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
-          <Route exact path="/profile" component={Profile} />
+          <Route exact path="/profile/:username" component={Profile} />
           <Route exact path="/categories" component={Categories} />
           <Route exact path="/editprofile" component={EditProfile} />
           <Route exact path="/categories/:category" component={Category} />
