@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getproducts } from ".././actions/productActions";
+import { getProducts } from ".././actions/productActions";
 
 import Container from "@material-ui/core/Container";
 
@@ -16,11 +16,15 @@ class Marketplace extends Component {
       username: "",
       email: "",
       photo: "",
-      descr: ""
+      descr: "",
+      products: []
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.props.getProducts();
+    this.setState({ products: this.props.products.products });
+  }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.profile.profile) {
@@ -31,9 +35,13 @@ class Marketplace extends Component {
         descr: nextProps.profile.profile.descr
       });
     }
+    this.setState({
+      products: nextProps.products.products
+    });
   }
 
   render() {
+    console.log("products", this.state.products);
     return (
       <div>
         <Container>
@@ -43,6 +51,13 @@ class Marketplace extends Component {
             </Button>
           </Grid>
         </Container>
+        <div>
+          {this.state.products.map(p => (
+            <li>
+              {p.name}:{p.price}
+            </li>
+          ))}
+        </div>
       </div>
     );
   }
@@ -55,7 +70,11 @@ Marketplace.propTypes = {
 
 const mapStateToProps = state => ({
   profile: state.profile,
-  auth: state.auth
+  auth: state.auth,
+  products: state.products
 });
 
-export default connect(mapStateToProps)(Marketplace);
+export default connect(
+  mapStateToProps,
+  { getProducts }
+)(Marketplace);

@@ -3,7 +3,6 @@ const router = express.Router();
 const Product = require("../Schemas/Product");
 const User = require("../Schemas/User");
 
-
 const multer = require("multer");
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
@@ -14,31 +13,32 @@ const storage = multer.diskStorage({
   }
 });
 
-
 const upload = multer({ storage });
 
-router.post("/",upload.single("photo"), (req, res) => {
+router.post("/", upload.single("photo"), (req, res) => {
+  const photo = req.file === undefined ? "" : req.file.originalname;
   const newProduct = Product({
     seller_id: req.body.seller_id,
-    name: req.body.name, 
+    name: req.body.name,
     price: req.body.price,
-    photo: req.file.originalname,
+    photo,
     descr: req.body.descr,
-    trade: req.body.trade 
-
+    trade: req.body.trade
   });
 
-  newProduct.save()
+  newProduct
+    .save()
     .then(product => {
       res.json(product);
     })
-    .catch(err => console.log(err));
+    .catch(err => console.log("err", err));
 });
 
 router.get("/", (req, res) => {
-  Comment.find()
+  Product.find()
     .populate("seller_id")
     .then(data => {
+      console.log("data:", data);
       res.json(data);
     })
     .catch(err => console.log(err));
