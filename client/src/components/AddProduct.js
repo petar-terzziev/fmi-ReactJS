@@ -5,16 +5,19 @@ import ImagePreview from "./ImagePreview";
 import Placeholder from "./placeholder";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { editprofil } from ".././actions/profileActions";
+import { postproduct } from ".././actions/productActions";
 import TextAreaFieldGroup from "./TextAreaFieldGroup";
-
-class EditProfile extends Component {
+import TextField from '@material-ui/core/TextField';
+class AddProduct extends Component {
   constructor(props) {
     super(props);
     console.log("ok");
     this.state = {
+      name: "",
+      price: 0,
+      descr: "",
       photo: [],
-      descr: ""
+      trade : false
     };
 
     this.onChange = this.onChange.bind(this);
@@ -33,13 +36,15 @@ class EditProfile extends Component {
   onsubmit = e => {
     e.preventDefault();
     
-    const profileData = new FormData();
-    profileData.append("userid", this.props.auth.user.id);
-    profileData.append("descr", this.state.descr);
-    profileData.append("photo",this.state.photo[0]);
-    this.props.editprofil(
-      profileData,
-      this.props.auth.user.name,
+    const productData = new FormData();
+    productData.append("selllerid", this.props.auth.user.id);
+    productData.append("name", this.state.name);
+    productData.append("price", this.state.price);
+    productData.append("descr", this.state.descr);
+    productData.append("photo",this.state.photo[0]);
+    productData.append("trade", this.state.trade);
+    this.props.postproduct(
+      productData,
       this.props.history
     );
   };
@@ -54,6 +59,28 @@ class EditProfile extends Component {
           padding: "15px"
         }}
       >
+           <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="name"
+                label="name"
+                name="name"
+                autoComplete="name"
+                value = {this.state.username}
+                onChange = {this.onChange}
+                autoFocus
+                    />
+             <TextField
+        id="price"
+        name = "price"
+        label="price"
+        value={this.state.price}
+        onChange={this.onChange}
+        type="number"
+        margin="normal"
+      />
         <DropZone
             accept="image/jpeg, image/png, image/gif, image/bmp"
             className="upload-container"
@@ -99,8 +126,8 @@ class EditProfile extends Component {
   }
 }
 
-EditProfile.propTypes = {
-  editprofil: PropTypes.func.isRequired,
+AddProduct.propTypes = {
+    postproduct: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
 };
 
@@ -110,5 +137,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { editprofil }
-)(withRouter(EditProfile));
+  {postproduct}
+)(withRouter(AddProduct));

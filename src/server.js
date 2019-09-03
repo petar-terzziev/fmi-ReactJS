@@ -25,6 +25,7 @@ const subcategories = require("./Routes/Subcategories.js");
 const threads = require("./Routes/Threads.js");
 const thread = require("./Routes/Thread.js");
 const comments = require("./Routes/Comments.js");
+const products = require("./Routes/Products.js");
 
 app.use(function(req, res, next) {
   // Website you wish to allow to connect
@@ -55,6 +56,7 @@ app.use("/api/threads", threads);
 app.use("/api/categories", subcategories);
 app.use("/api/users", users);
 app.use("/api/profile", profile);
+app.use("/api/products",products);
 app.use("/api/comments", comments);
 
 app.listen(port, () => {

@@ -19,13 +19,13 @@ export const getProfile = handle => dispatch => {
     );
 };
 
-export const editprofil = (profileData,username,history) => dispatch => {
-  console.log(profileData);
+export const postproduct = (productData,history) => dispatch => {
+  console.log(productData.body);
   axios
-    .post(`http://localhost:8000/api/profile/edit/${username}`, profileData, {
+    .post(`http://localhost:8000/api/products/`, productData, {
       headers: { 'content-type': 'multipart/form-data' },
   })
-    .then(res => history.push(`/profile/${username}`))
+    .then(res => history.push(`/markeplace`))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,

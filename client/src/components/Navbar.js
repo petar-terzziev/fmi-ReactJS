@@ -15,8 +15,8 @@ class Navbar extends Component {
     const state_auth = this.props.auth;
 
     const authLinks = (
-      <ul className="navbar-nav ml-auto">
-        <div className="nav-item">
+      <ul className="navbar-nav mr-auto">
+        <li className="nav-item">
           <a
             href=""
             onClick={this.onLogoutClick.bind(this)}
@@ -24,8 +24,9 @@ class Navbar extends Component {
           >
             Logout
           </a>
+          </li>
           <li className="nav-item">
-            <Link className="nav-link" to={`/profile/${this.props.auth.user.name}`}>\
+            <Link className="nav-link" to={`/profile/${this.props.auth.user.name}`}>
               My Profile
             </Link>
           </li>
@@ -34,12 +35,16 @@ class Navbar extends Component {
               Categories
             </Link>
           </li>
-        </div>
+          <li className="nav-item">
+          <Link className="nav-link" to="/marketplace">
+            Categories
+          </Link>
+        </li>
       </ul>
     );
 
     const guestLinks = (
-      <ul className="navbar-nav ml-auto">
+      <ul className="navbar-nav mr-auto">
         <li className="nav-item">
           <Link className="nav-link" to="/register">
             Sign Up
@@ -55,20 +60,24 @@ class Navbar extends Component {
             Categories
           </Link>
         </li>
+        <li className="nav-item">
+          <Link className="nav-link" to="/marketplace">
+            Marketplace
+          </Link>
+        </li>
       </ul>
     );
 
     return (
-      <nav className="navbar navbar-dark bg-dark mb-4">
-        <div className="container">
+      <nav className="navbar navbar-expand-md  navbar-dark bg-dark">
           <i className="fas fa-cogs" />
           <Link className="navbar-brand" to="/">
             TechForum
           </Link>
-          <div className="collapse navbar-collapse" id="mobile-nav">
+          <div className="collapse navbar-collapse">
             {isRegistered(state_auth) ? authLinks : guestLinks}
           </div>
-        </div>
+
       </nav>
     );
   }

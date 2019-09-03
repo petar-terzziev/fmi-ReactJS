@@ -12,7 +12,8 @@ class UploadImageForm extends Component {
     this.state = { imageFile: [] };
   }
   handleFormSubmit = formProps => {
-    this.props.onDrop(this.state.imageFile);
+    console.log(this.state.imageFile)
+    this.props.sth  = this.state.imageFile;
   };
 
   handleOnDrop = newImageFile => this.setState({ imageFile: newImageFile });
@@ -23,7 +24,7 @@ class UploadImageForm extends Component {
     <div className="app-container">
       <h1 className="title">Upload An Image</h1>
       <hr />
-      <form>
+      
         <div className="preview-container">
           <DropZone
             accept="image/jpeg, image/png, image/gif, image/bmp"
@@ -49,23 +50,6 @@ class UploadImageForm extends Component {
               <ShowError error={imageIsRequired(this.state.imageFile)} />
             )}
         </div>
-        <button
-          type="button"
-          className="uk-button uk-button-primary uk-button-large"
-          onClick={this.handleFormSubmit}
-        >
-          Submit
-        </button>
-        <button
-          type="button"
-          className="uk-button uk-button-default uk-button-large"
-          disabled={this.props.pristine || this.props.submitting}
-          onClick={this.resetForm}
-          style={{ float: "right" }}
-        >
-          Clear
-        </button>
-      </form>
     </div>
   );
 }

@@ -2,14 +2,16 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getProfile } from "../actions/profileActions";
+import {getproducts} from ".././actions/productActions"
+
+
 import Container from '@material-ui/core/Container';
 
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 
 
-class Profile extends Component {
+class Marketplace extends Component {
   constructor() {
     super();
     this.state = {
@@ -21,12 +23,8 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    console.log("ok ok ok");
-    this.props.getProfile(this.props.match.params.username);
-    const profile = this.props.profile.profile;
-    console.log(this.props.auth.user.name===this.props.match.params.username);
-    if (profile) {
-    }
+    this.props.
+
   }
 
   componentWillReceiveProps(nextProps) {
@@ -45,21 +43,9 @@ class Profile extends Component {
       <div>
         <Container>
         <Grid>
-        <h2>Hi, {this.state.username}</h2>
-        {this.state.photo && (
-          <img
-            src={`http://localhost:8000/${this.state.photo}`}
-            alt="userphoto"
-            style={{ height: 80,width: 80 }}
-          />
-        )}
-        <li>e-mail: {this.state.email}</li>
-        <p>About me: {this.state.descr}</p>
-        { this.props.match.params.username===this.props.auth.user.name &&(
         <Button>
-        <Link to="/editprofile"> Edit Profile</Link>
+        <Link to="/addproduct"> Add Product</Link>
         </Button>
-        )}
         </Grid>
         </Container>
       </div>
@@ -67,8 +53,7 @@ class Profile extends Component {
   }
 }
 
-Profile.propTypes = {
-  getProfile: PropTypes.func.isRequired,
+Marketplace.propTypes = {
   profile: PropTypes.object,
   auth: PropTypes.object.isRequired
 };
@@ -80,5 +65,4 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getProfile }
-)(Profile);
+)(Marketplace);

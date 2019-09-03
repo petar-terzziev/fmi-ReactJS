@@ -11,6 +11,8 @@ import EditProfile from "./components/EditProfile";
 import Subcategory from "./components/Subcategory";
 import Category from "./components/Category";
 import Categories from "./components/Categories";
+import Marketplace from "./components/Marketplace";
+import AddProduct from "./components/AddProduct";
 import Thread from "./components/Thread";
 import newThread from "./components/newThread";
 import jwt_decode from "jwt-decode";
@@ -44,12 +46,17 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Router>
-          <Route path="" component={Navbar} />
+          <div className="App">
+          <Navbar/>
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/profile/:username" component={Profile} />
           <Route exact path="/categories" component={Categories} />
           <Route exact path="/editprofile" component={EditProfile} />
+          <Route exact path="/marketplace" component={Marketplace} />
+          <Route exact path="/addproduct" component={AddProduct} />
+
+          
           <Route exact path="/categories/:category" component={Category} />
           <Route
             exact
@@ -61,6 +68,7 @@ class App extends Component {
             path="/categories/:category/:subcategory/new"
             component={newThread}
           />
+          </div>
         </Router>
       </Provider>
     );

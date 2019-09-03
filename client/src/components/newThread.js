@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { newThread } from "../actions/threadActions";
 import { getProfile } from "../actions/profileActions";
 
+
+import TextField from '@material-ui/core/TextField';
 class Thread extends React.Component {
   constructor(props) {
     super(props);
@@ -44,12 +46,17 @@ class Thread extends React.Component {
             value={this.props.title}
             onChange={this.onChange}
           />
-          <textarea
-            type="text"
-            name="content"
-            value={this.props.content}
-            onChange={this.onChange}
-          />
+      <TextField
+        id="filled-multiline-flexible"
+        label="Multiline"
+        multiline
+        rowsMax="4"
+        value={this.props.content}
+        onChange={this.onChange}
+        margin="normal"
+        helperText="hello"
+        variant="filled"
+      />
           <input type="submit" value="Submit" />
         </form>
       </div>
