@@ -24,18 +24,21 @@ class Navbar extends Component {
           >
             Logout
           </a>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to={`/profile/${this.props.auth.user.name}`}>
-              My Profile
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/categories">
-              Categories
-            </Link>
-          </li>
-          <li className="nav-item">
+        </li>
+        <li className="nav-item">
+          <Link
+            className="nav-link"
+            to={`/profile/${this.props.auth.user.name}`}
+          >
+            My Profile
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link" to="/categories">
+            Categories
+          </Link>
+        </li>
+        <li className="nav-item">
           <Link className="nav-link" to="/marketplace">
             Categories
           </Link>
@@ -70,14 +73,13 @@ class Navbar extends Component {
 
     return (
       <nav className="navbar navbar-expand-md  navbar-dark bg-dark">
-          <i className="fas fa-cogs" />
-          <Link className="navbar-brand" to="/">
-            TechForum
-          </Link>
-          <div className="collapse navbar-collapse">
-            {isRegistered(state_auth) ? authLinks : guestLinks}
-          </div>
-
+        <i className="fas fa-cogs" />
+        <Link className="navbar-brand" to="/">
+          TechForum
+        </Link>
+        <div className="collapse navbar-collapse">
+          {isRegistered(state_auth) ? authLinks : guestLinks}
+        </div>
       </nav>
     );
   }

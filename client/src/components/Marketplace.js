@@ -2,14 +2,12 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import {getproducts} from ".././actions/productActions"
+import { getproducts } from ".././actions/productActions";
 
+import Container from "@material-ui/core/Container";
 
-import Container from '@material-ui/core/Container';
-
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-
+import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
 
 class Marketplace extends Component {
   constructor() {
@@ -22,10 +20,7 @@ class Marketplace extends Component {
     };
   }
 
-  componentDidMount() {
-    this.props.
-
-  }
+  componentDidMount() {}
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.profile.profile) {
@@ -42,11 +37,11 @@ class Marketplace extends Component {
     return (
       <div>
         <Container>
-        <Grid>
-        <Button>
-        <Link to="/addproduct"> Add Product</Link>
-        </Button>
-        </Grid>
+          <Grid>
+            <Button>
+              <Link to="/addproduct"> Add Product</Link>
+            </Button>
+          </Grid>
         </Container>
       </div>
     );
@@ -63,6 +58,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(
-  mapStateToProps,
-)(Marketplace);
+export default connect(mapStateToProps)(Marketplace);

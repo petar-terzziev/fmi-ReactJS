@@ -5,8 +5,8 @@ const path = require("path");
 const session = require("express-session");
 const cors = require("cors");
 const port = 8000;
-//const db = "mongodb://localhost/forum";
-const db1= "mongodb+srv://chovek:12345@cluster0-6wcmh.mongodb.net/test?retryWrites=true&w=majority";
+const db1 = "mongodb://localhost/forum";
+//const db1= "mongodb+srv://chovek:12345@cluster0-6wcmh.mongodb.net/test?retryWrites=true&w=majority";
 mongoose
   .connect(db1, { useNewUrlParser: true })
   .then(() => {
@@ -56,7 +56,7 @@ app.use("/api/threads", threads);
 app.use("/api/categories", subcategories);
 app.use("/api/users", users);
 app.use("/api/profile", profile);
-app.use("/api/products",products);
+app.use("/api/products", products);
 app.use("/api/comments", comments);
 
 app.listen(port, () => {
