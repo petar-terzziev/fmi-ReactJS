@@ -20,17 +20,14 @@ class Profile extends Component {
     };
   }
 
-  componentDidMount() {
-    console.log("ok ok ok");
+  componentWillMount() {
     this.props.getProfile(this.props.match.params.username);
-    const profile = this.props.profile.profile;
-    console.log(this.props.auth.user.name===this.props.match.params.username);
-    if (profile) {
-    }
   }
 
   componentWillReceiveProps(nextProps) {
+    
     if (nextProps.profile.profile) {
+      console.log(nextProps.profile.profile);
       this.setState({
         username: nextProps.profile.profile.username,
         email: nextProps.profile.profile.email,
@@ -39,6 +36,7 @@ class Profile extends Component {
       });
     }
   }
+
 
   render() {
     return (

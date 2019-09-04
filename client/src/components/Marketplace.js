@@ -23,7 +23,6 @@ class Marketplace extends Component {
   }
 
   componentDidMount() {
-    this.props.
 
   }
 

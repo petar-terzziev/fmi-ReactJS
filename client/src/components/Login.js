@@ -41,6 +41,7 @@ class Login extends Component {
     };
 
     this.props.loginUser(userData, this.props.history);
+    console.log(this.state.auth);
   }
 
   onChange(e) {
