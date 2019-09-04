@@ -5,8 +5,8 @@ const path = require("path");
 const session = require("express-session");
 const cors = require("cors");
 const port = 8000;
-//const db1 = "mongodb://localhost/forum";
-const db1= "mongodb+srv://chovek:12345@cluster0-6wcmh.mongodb.net/test?retryWrites=true&w=majority";
+const db1 = "mongodb://localhost/forum";
+//const db1= "mongodb+srv://chovek:12345@cluster0-6wcmh.mongodb.net/test?retryWrites=true&w=majority";
 mongoose
   .connect(db1, { useNewUrlParser: true })
   .then(() => {
@@ -26,6 +26,7 @@ const threads = require("./Routes/Threads.js");
 const thread = require("./Routes/Thread.js");
 const comments = require("./Routes/Comments.js");
 const products = require("./Routes/Products.js");
+const search = require("./Routes/Search.js");
 
 app.use(function(req, res, next) {
   // Website you wish to allow to connect
@@ -58,6 +59,7 @@ app.use("/api/users", users);
 app.use("/api/profile", profile);
 app.use("/api/products", products);
 app.use("/api/comments", comments);
+app.use("/api/search", search);
 
 app.listen(port, () => {
   console.log("server listening on " + port);

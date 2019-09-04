@@ -7,24 +7,24 @@ import { logoutUser } from ".././actions/authActions";
 import { isRegistered } from "../userType";
 
 class Navbar extends Component {
-constructor(){
-  super();
-  this.state = {
-    data: "",
-    in: "",
+  constructor() {
+    super();
+    this.state = {
+      data: "",
+      in: ""
+    };
+    this.onChange = this.onChange.bind(this);
+    this.onClick = this.onClick.bind(this);
   }
-  this.onChange = this.onChange.bind(this);
-  this.onClick = this.onClick.bind(this);
-}
-onChange(e) {
-  this.setState({ [e.target.name]: e.target.value });
-  console.log(this.state);
-}
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+    console.log(this.state);
+  }
   onLogoutClick(e) {
     e.preventDefault();
     this.props.logoutUser(this.props.history);
   }
-  onClick(e){
+  onClick(e) {
     e.preventDefault();
     this.props.history.push(`/results/${this.state.in}/${this.state.data}`);
   }
@@ -62,17 +62,30 @@ onChange(e) {
           </Link>
         </li>
         <li>
-        <form className="form-inline my-2 my-lg-0">
-      <input className="form-control mr-sm-2" type="search" name="data" value={this.state.data} onChange={this.onChange} placeholder="Search" aria-label="Search"/>
-      <select className="form-control"  name= "in" onChange={this.onChange}>
-          <option value = "marketplace" >Marketplace</option>
-          <option value = "threads"  >Threads</option>
-          <option value = "profiles">Profiles</option>
-          </select>
-      <button className="btn btn-outline-primary my-2 my-sm-0" color="primary" onClick={this.onClick}>Search</button>
-    </form>
-  
-    </li>
+          <form className="form-inline my-2 my-lg-0">
+            <input
+              className="form-control mr-sm-2"
+              type="search"
+              name="data"
+              value={this.state.data}
+              onChange={this.onChange}
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <select className="form-control" name="in" onChange={this.onChange}>
+              <option value="marketplace">Marketplace</option>
+              <option value="threads">Threads</option>
+              <option value="profiles">Profiles</option>
+            </select>
+            <button
+              className="btn btn-outline-primary my-2 my-sm-0"
+              color="primary"
+              onClick={this.onClick}
+            >
+              Search
+            </button>
+          </form>
+        </li>
       </ul>
     );
 
@@ -99,16 +112,30 @@ onChange(e) {
           </Link>
         </li>
         <li>
-        <form className="form-inline my-2 my-lg-0">
-      <input className="form-control mr-sm-2" type="search" name="data" value={this.state.data} onChange={this.onChange} placeholder="Search" aria-label="Search"/>
-      <select className="form-control"  name= "in" onChange={this.onChange}>
-          <option value = "marketplace" >Marketplace</option>
-          <option value = "threads"  >Threads</option>
-          <option value = "profiles">Profiles</option>
-          </select>
-      <button className="btn btn-outline-primary my-2 my-sm-0" color="primary" onClick={this.onClick}>Search</button>
-    </form>
-    </li>
+          <form className="form-inline my-2 my-lg-0">
+            <input
+              className="form-control mr-sm-2"
+              type="search"
+              name="data"
+              value={this.state.data}
+              onChange={this.onChange}
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <select className="form-control" name="in" onChange={this.onChange}>
+              <option value="marketplace">Marketplace</option>
+              <option value="threads">Threads</option>
+              <option value="profiles">Profiles</option>
+            </select>
+            <button
+              className="btn btn-outline-primary my-2 my-sm-0"
+              color="primary"
+              onClick={this.onClick}
+            >
+              Search
+            </button>
+          </form>
+        </li>
       </ul>
     );
 

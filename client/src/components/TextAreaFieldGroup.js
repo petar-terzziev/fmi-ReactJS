@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import TextField from "@material-ui/core/TextField";
+import React from "react";
+import PropTypes from "prop-types";
+//import TextField from "@material-ui/core/TextField";
 const TextAreaFieldGroup = ({
   name,
   placeholder,
@@ -12,8 +12,7 @@ const TextAreaFieldGroup = ({
   return (
     <div className="form-group">
       <textarea
-     
-        className='form-control form-control-lg'
+        className="form-control form-control-lg"
         placeholder={placeholder}
         name={name}
         value={value}

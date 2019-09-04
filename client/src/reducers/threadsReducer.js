@@ -1,4 +1,4 @@
-import { GET_THREADS, SEARCH_THREADS } from "../actions/types";
+import { GET_THREADS } from "../actions/types";
 
 const initialState = {
   threads: []
@@ -11,11 +11,6 @@ export default function(state = initialState, action) {
         ...state,
         threads: action.payload
       };
-      case SEARCH_THREADS:
-        return {
-          ...state,
-          threads: action.payload
-        }
     default:
       return state;
   }

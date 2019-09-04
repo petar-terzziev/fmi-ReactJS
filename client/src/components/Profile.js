@@ -31,7 +31,6 @@ class Profile extends Component {
     }
   }
 
-
   render() {
     const isMyProfile =
       this.props.match.params.username === this.props.auth.user.name;

@@ -8,12 +8,12 @@ import Container from "@material-ui/core/Container";
 
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-import ListItem from "@material-ui/core/ListItem";
-import List from "@material-ui/core/List";
-import ListItemText from "@material-ui/core/ListItemText";
-import CardMedia from '@material-ui/core/CardMedia';
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from "@material-ui/core/styles";
+//import ListItem from "@material-ui/core/ListItem";
+//import List from "@material-ui/core/List";
+//import ListItemText from "@material-ui/core/ListItemText";
+//import CardMedia from "@material-ui/core/CardMedia";
+import Typography from "@material-ui/core/Typography";
+//import { withStyles } from "@material-ui/core/styles";
 
 class Marketplace extends Component {
   constructor() {
@@ -47,7 +47,7 @@ class Marketplace extends Component {
   }
 
   render() {
-      const {classes} = this.props;
+    //const { classes } = this.props;
     return (
       <div>
         <Container>
@@ -57,32 +57,35 @@ class Marketplace extends Component {
             </Button>
           </Grid>
           <Grid>
-        <div>
-            
-          {this.state.products.map(p => (
-              <div>
-            <Grid item>
-              <Typography component="h1" variant="h5">
-              {p.name}
-            </Typography>
-            </Grid>
-            <Grid item>
-            <img src ={`http://localhost:8000/${p.photo}`} alt = "product" style ={{ height: 120, width: 120 }}/>
-            </Grid>
-            <Grid item>
-              <Typography component="p" variant="body2">
-              {p.price} lv.
-            </Typography>
-            </Grid>
-            <Grid item>
-            <Typography component="p" variant="body2">
-              {p.descr}
-            </Typography>
-            </Grid>
+            <div>
+              {this.state.products.map((p, index) => (
+                <div key={index}>
+                  <Grid item>
+                    <Typography component="h1" variant="h5">
+                      {p.name}
+                    </Typography>
+                  </Grid>
+                  <Grid item>
+                    <img
+                      src={`http://localhost:8000/${p.photo}`}
+                      alt="product"
+                      style={{ height: 120, width: 120 }}
+                    />
+                  </Grid>
+                  <Grid item>
+                    <Typography component="p" variant="body2">
+                      {p.price} lv.
+                    </Typography>
+                  </Grid>
+                  <Grid item>
+                    <Typography component="p" variant="body2">
+                      {p.descr}
+                    </Typography>
+                  </Grid>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-        </Grid>
+          </Grid>
         </Container>
       </div>
     );
