@@ -11,7 +11,6 @@ import TextField from "@material-ui/core/TextField";
 class AddProduct extends Component {
   constructor(props) {
     super(props);
-    console.log("ok");
     this.state = {
       name: "",
       price: 0,

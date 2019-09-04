@@ -5,12 +5,12 @@ import { GET_PROFILE, GET_ERRORS } from "./types";
 export const getProfile = handle => dispatch => {
   axios
     .get(`http://localhost:8000/api/profile/${handle}`)
-    .then(res =>
+    .then(res => {
       dispatch({
         type: GET_PROFILE,
         payload: res.data
-      })
-    )
+      });
+    })
     .catch(err =>
       dispatch({
         type: GET_PROFILE,

@@ -37,7 +37,7 @@ class Thread extends React.Component {
   };
 
   toggleReply = value => {
-    this.setState({ newComment: !this.state.newComment });
+    this.setState({ newComment: !this.state.newComment, newCommentValue: "" });
   };
 
   onChange = event => {

@@ -4,8 +4,7 @@ import { connect } from "react-redux";
 import { newThread } from "../actions/threadActions";
 import { getProfile } from "../actions/profileActions";
 
-
-import TextField from '@material-ui/core/TextField';
+import TextField from "@material-ui/core/TextField";
 class Thread extends React.Component {
   constructor(props) {
     super(props);
@@ -16,13 +15,17 @@ class Thread extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this.props.getProfile(this.props.auth.user.name);
+  }
+
   onChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
   onSubmit = event => {
     event.preventDefault();
-    this.props.getProfile(this.props.auth.user.id);
+    console.log(this.props);
     const profile = this.props.profile.profile;
     if (profile) {
       this.props.newThread(
@@ -46,17 +49,17 @@ class Thread extends React.Component {
             value={this.props.title}
             onChange={this.onChange}
           />
-      <TextField
-        id="filled-multiline-flexible"
-        label="Multiline"
-        multiline
-        rowsMax="4"
-        value={this.props.content}
-        onChange={this.onChange}
-        margin="normal"
-        helperText="hello"
-        variant="filled"
-      />
+          <TextField
+            id="filled-multiline-flexible"
+            label="Multiline"
+            multiline
+            rowsMax="4"
+            value={this.props.content}
+            onChange={this.onChange}
+            margin="normal"
+            helperText="hello"
+            variant="filled"
+          />
           <input type="submit" value="Submit" />
         </form>
       </div>
@@ -65,7 +68,9 @@ class Thread extends React.Component {
 }
 
 Thread.propTypes = {
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  newThread: PropTypes.func.isRequired,
+  getProfile: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

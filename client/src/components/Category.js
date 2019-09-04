@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import SubmitForm from "./SubmitForm";
 import { connect } from "react-redux";
 import { isAdmin } from "../userType";
@@ -70,6 +71,13 @@ class Category extends React.Component {
     );
   }
 }
+
+Category.propTypes = {
+  newSubcategory: PropTypes.func.isRequired,
+  getSubcategories: PropTypes.func.isRequired,
+  subcategories: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired
+};
 
 const mapStateToProps = state => ({
   subcategories: state.subcategories,

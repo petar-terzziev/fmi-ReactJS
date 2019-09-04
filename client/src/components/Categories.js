@@ -1,5 +1,6 @@
 import React from "react";
 import Category from "./Category";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getCategories } from "../actions/categoryActions";
 
@@ -17,6 +18,11 @@ class Categories extends React.Component {
     );
   }
 }
+
+Categories.propTypes = {
+  getCategories: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+};
 
 const mapStateToProps = state => ({
   auth: state.auth

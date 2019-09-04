@@ -25,10 +25,14 @@ class Profile extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.profile !== this.props.profile) {
+    console.log(nextProps.profile !== this.props.profile);
+    if (
+      this.props.profile.profile &&
+      nextProps.profile.profile.username !== this.props.profile.profile.username
+    ) {
       this.props.getProfile(this.props.match.params.username);
-      this.setState(this.props.profile.profile);
     }
+    this.setState(nextProps.profile.profile);
   }
 
   render() {

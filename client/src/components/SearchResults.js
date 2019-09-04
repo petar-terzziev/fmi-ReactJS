@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { search } from "../actions/searchActions";
 import { Link } from "react-router-dom";
@@ -25,7 +26,6 @@ export class SearchResults extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // console.log(nextProps === this.props);
     if (
       this.props.match.params.in !== nextProps.match.params.in ||
       this.props.match.params.data !== nextProps.match.params.data
@@ -70,6 +70,12 @@ export class SearchResults extends Component {
     );
   }
 }
+
+SearchResults.propTypes = {
+  search: PropTypes.func.isRequired,
+  auth: PropTypes.object,
+  searchResults: PropTypes.object
+};
 
 const mapStateToProps = state => ({
   auth: state.auth,

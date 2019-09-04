@@ -56,22 +56,6 @@ class Subcategory extends React.Component {
     this.props.history.push(this.props.location.pathname + "/new");
   };
 
-  handleForm = title => {
-    console.log(title);
-    this.props.getProfile(this.props.auth.user.id);
-    const profile = this.props.profile.profile;
-    if (profile) {
-      this.props.newThread(title, profile.username, this.state.title);
-      this.newThread();
-      this.props.getThreads(this.props.name);
-      this.retrieveThreads(this.props);
-    }
-  };
-
-  loadthread = () => {
-    console.log("yeye");
-  };
-
   render() {
     const userActions = (
       <div>

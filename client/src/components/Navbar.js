@@ -11,14 +11,13 @@ class Navbar extends Component {
     super();
     this.state = {
       data: "",
-      in: ""
+      in: "marketplace"
     };
     this.onChange = this.onChange.bind(this);
     this.onClick = this.onClick.bind(this);
   }
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
-    console.log(this.state);
   }
   onLogoutClick(e) {
     e.preventDefault();
