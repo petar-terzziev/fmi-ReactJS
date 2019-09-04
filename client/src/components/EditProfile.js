@@ -21,22 +21,20 @@ class EditProfile extends Component {
   }
 
   onChange(e) {
+    console.log(e.target.name);
     this.setState({
       [e.target.name]: e.target.value
     });
   }
 
-  
   onDrop = newImageFile => this.setState({ photo: newImageFile });
 
-  
   onsubmit = e => {
     e.preventDefault();
-    
     const profileData = new FormData();
     profileData.append("userid", this.props.auth.user.id);
     profileData.append("descr", this.state.descr);
-    profileData.append("photo",this.state.photo[0]);
+    profileData.append("photo", this.state.photo[0]);
     this.props.editprofil(
       profileData,
       this.props.auth.user.name,
@@ -46,15 +44,15 @@ class EditProfile extends Component {
   render() {
     return (
       <form>
-      <div
-        style={{
-          width: "400px",
-          margin: "30px auto",
-          backgroundColor: "#F8F7FA",
-          padding: "15px"
-        }}
-      >
-        <DropZone
+        <div
+          style={{
+            width: "400px",
+            margin: "30px auto",
+            backgroundColor: "#F8F7FA",
+            padding: "15px"
+          }}
+        >
+          <DropZone
             accept="image/jpeg, image/png, image/gif, image/bmp"
             className="upload-container"
             onDrop={this.onDrop}
@@ -62,7 +60,10 @@ class EditProfile extends Component {
           >
             {({ getRootProps, getInputProps }) =>
               this.state.photo && this.state.photo.length > 0 ? (
-                <ImagePreview name = "imagepreview" imagefile={this.state.photo} />
+                <ImagePreview
+                  name="imagepreview"
+                  imagefile={this.state.photo}
+                />
               ) : (
                 <Placeholder
                   error={"nononon"}
@@ -73,27 +74,26 @@ class EditProfile extends Component {
               )
             }
           </DropZone>
-        <TextAreaFieldGroup
-          name="descr"
-          value={this.state.descr}
-          onChange={this.onChange}
-        />
-                <button
-          type="button"
-          className="uk-button uk-button-primary uk-button-large"
-          onClick={this.onsubmit}
-        >
-          Submit
-        </button>
-        <button
-          type="button"
-          className="uk-button uk-button-default uk-button-large"
-          style={{ float: "right" }}
-        >
-          Clear
-        </button>
-      </div>
-      
+          <TextAreaFieldGroup
+            name="descr"
+            value={this.state.descr}
+            onChange={this.onChange}
+          />
+          <button
+            type="button"
+            className="uk-button uk-button-primary uk-button-large"
+            onClick={this.onsubmit}
+          >
+            Submit
+          </button>
+          <button
+            type="button"
+            className="uk-button uk-button-default uk-button-large"
+            style={{ float: "right" }}
+          >
+            Clear
+          </button>
+        </div>
       </form>
     );
   }

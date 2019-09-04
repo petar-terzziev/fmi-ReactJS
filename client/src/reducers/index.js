@@ -4,10 +4,12 @@ import profileReducer from "./profileReducer";
 import subcategoryReducer from "./subcategoryReducer";
 import threadsReducer from "./threadsReducer";
 import threadReducer from "./threadReducer";
+import productReducer from "./productReducer";
 export default combineReducers({
   auth: authReducer,
   profile: profileReducer,
   subcategories: subcategoryReducer,
   threads: threadsReducer,
-  thread: threadReducer
+  thread: threadReducer,
+  products: productReducer
 });

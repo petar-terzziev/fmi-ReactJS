@@ -19,12 +19,11 @@ export const getProfile = handle => dispatch => {
     );
 };
 
-export const editprofil = (profileData,username,history) => dispatch => {
-  console.log(profileData);
+export const editprofil = (profileData, username, history) => dispatch => {
   axios
     .post(`http://localhost:8000/api/profile/edit/${username}`, profileData, {
-      headers: { 'content-type': 'multipart/form-data' },
-  })
+      headers: { "content-type": "multipart/form-data" }
+    })
     .then(res => history.push(`/profile/${username}`))
     .catch(err =>
       dispatch({
@@ -33,5 +32,3 @@ export const editprofil = (profileData,username,history) => dispatch => {
       })
     );
 };
-
-

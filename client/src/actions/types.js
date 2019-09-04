@@ -12,3 +12,4 @@ export const GET_THREADS = "GET_THREADS";
 export const GET_THREAD = "GET_THREAD";
 export const NEW_COMMENT = "NEW_COMMENT";
 export const GET_COMMENTS = "GET_COMMENTS";
+export const GET_PRODUCTS = "GET_PRODUCTS";
