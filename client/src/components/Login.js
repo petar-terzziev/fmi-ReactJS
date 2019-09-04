@@ -52,7 +52,10 @@ class Login extends Component {
     return (
       <Container component="main" maxWidth="xs">
         <CssBaseline />
-        <div className={classes.paper}>
+        <div className={classes.paper}  style={{
+            margin: "30px auto",
+            padding: "15px"
+          }}>
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>

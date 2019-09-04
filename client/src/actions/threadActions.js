@@ -4,7 +4,8 @@ import {
   GET_THREAD,
   NEW_THREAD,
   NEW_COMMENT,
-  GET_COMMENTS
+  GET_COMMENTS,
+  SEARCH_THREADS
 } from "./types";
 
 export const getThreads = handle => dispatch => {
@@ -20,6 +21,23 @@ export const getThreads = handle => dispatch => {
       dispatch({
         type: GET_THREADS,
         payload: null
+      })
+    );
+};
+
+export const searchThreads = handle => dispatch => {
+  axios
+    .get(`http://localhost:8000/api/threads/search/${handle}`)
+    .then(res => {
+      dispatch({
+        type: SEARCH_THREADS,
+        payload: res.data
+      });
+    })
+    .catch(err =>
+      dispatch({
+        type: SEARCH_THREADS,
+        payload: err
       })
     );
 };

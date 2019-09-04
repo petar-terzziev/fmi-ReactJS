@@ -20,7 +20,6 @@ export const getProducts = () => dispatch => {
 };
 
 export const postproduct = (productData, history) => dispatch => {
-  console.log(productData.body);
   axios
     .post(`http://localhost:8000/api/products/`, productData, {
       headers: { "content-type": "multipart/form-data" }

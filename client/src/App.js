@@ -8,6 +8,7 @@ import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import Profile from "./components/Profile";
 import EditProfile from "./components/EditProfile";
+import SearchResults from "./components/SearchResults"
 import Subcategory from "./components/Subcategory";
 import Category from "./components/Category";
 import Categories from "./components/Categories";
@@ -55,6 +56,8 @@ class App extends Component {
           <Route exact path="/editprofile" component={EditProfile} />
           <Route exact path="/marketplace" component={Marketplace} />
           <Route exact path="/addproduct" component={AddProduct} />
+          <Route exact path="/addproduct" component={AddProduct} />
+          <Route exact path="/results/:in/:data" component={SearchResults} />
 
           
           <Route exact path="/categories/:category" component={Category} />

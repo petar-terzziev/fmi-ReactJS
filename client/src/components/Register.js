@@ -53,9 +53,12 @@ class Register extends Component {
       <div className={classes.root}>
         <Container component="main" maxWidth="xs">
           <CssBaseline />
-          <div className={classes.paper}>
+          <div className={classes.paper}  style={{
+            margin: "30px auto",
+            padding: "15px"
+          }}>
             <Typography component="h1" variant="h5">
-              Sign in
+              Sign Up
             </Typography>
             <form className={classes.form} noValidate>
               <TextField
@@ -106,7 +109,7 @@ class Register extends Component {
                 onClick={this.onSubmit}
                 className={classes.submit}
               >
-                Sign In
+                Sign Up
               </Button>
               <Grid container></Grid>
             </form>

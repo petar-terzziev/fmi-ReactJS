@@ -31,4 +31,16 @@ router.get("/:subcategory", (req, res) => {
   });
 });
 
+router.get("/search/:title", (req, res) => {
+  Thread.find({ title : req.params.title }).then(data => {
+    let threads = [];
+    data.map(c =>
+      threads.push({
+        id: c.id,
+        title: c.title
+      })
+    );
+    res.json(threads);
+  });
+});
 module.exports = router;
