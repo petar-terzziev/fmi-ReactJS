@@ -62,7 +62,7 @@ export class SearchResults extends Component {
         <div>
           {this.state.products.map((p, index) => (
             <li key={index}>
-              <Link to={`/products/${p.name}`}>{p.name}</Link>
+              {p.name}: {p.price}
             </li>
           ))}
         </div>

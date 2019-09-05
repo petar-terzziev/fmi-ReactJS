@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const port = 8000;
-const db1 = "mongodb://localhost/forum";
-//const db1= "mongodb+srv://chovek:12345@cluster0-6wcmh.mongodb.net/test?retryWrites=true&w=majority";
+//const db1 = "mongodb://localhost/forum";
+const db1= "mongodb+srv://chovek:12345@cluster0-6wcmh.mongodb.net/test?retryWrites=true&w=majority";
 mongoose
   .connect(db1, { useNewUrlParser: true })
   .then(() => {

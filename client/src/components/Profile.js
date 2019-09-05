@@ -40,7 +40,10 @@ class Profile extends Component {
       this.props.match.params.username === this.props.auth.user.name;
 
     return (
-      <div>
+      <div style={{
+        margin: "30px auto",
+        padding: "15px"
+      }}>
         <Container>
           <Grid>
             <h2>

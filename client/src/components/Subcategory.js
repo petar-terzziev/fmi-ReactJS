@@ -66,7 +66,10 @@ class Subcategory extends React.Component {
     );
     const { classes } = this.props;
     return (
-      <div className={classes.root}>
+      <div className={classes.root} style={{
+        margin: "30px auto",
+        padding: "15px"
+      }}>
         <Container component="main">
           <CssBaseline />
           <Grid item container lg={12}>

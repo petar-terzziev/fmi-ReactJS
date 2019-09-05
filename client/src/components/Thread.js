@@ -65,7 +65,10 @@ class Thread extends React.Component {
       </form>
     );
     return (
-      <div>
+      <div style={{
+        margin: "30px auto",
+        padding: "15px"
+      }}>
         <div>
           <h1>{this.props.thread.title}</h1>
           <p>{this.props.thread.content}</p>

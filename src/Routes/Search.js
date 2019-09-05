@@ -30,7 +30,8 @@ router.get("/:type/:value", (req, res) => {
         data.map(c =>
           results.products.push({
             id: c.id,
-            name: c.name
+            name: c.name,
+            price: c.price
           })
         );
         res.json(results);

@@ -56,7 +56,6 @@ class App extends Component {
           <Route exact path="/editprofile" component={EditProfile} />
           <Route exact path="/marketplace" component={Marketplace} />
           <Route exact path="/addproduct" component={AddProduct} />
-          <Route exact path="/addproduct" component={AddProduct} />
           <Route exact path="/results/:in/:data" component={SearchResults} />
 
           

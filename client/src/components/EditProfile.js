@@ -90,6 +90,7 @@ class EditProfile extends Component {
             type="button"
             className="uk-button uk-button-default uk-button-large"
             style={{ float: "right" }}
+            
           >
             Clear
           </button>

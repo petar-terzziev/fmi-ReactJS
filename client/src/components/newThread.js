@@ -3,8 +3,10 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { newThread } from "../actions/threadActions";
 import { getProfile } from "../actions/profileActions";
+import TextAreaFieldGroup from "./TextAreaFieldGroup";
+import Button from "@material-ui/core/Button";
+import { Typography } from "@material-ui/core";
 
-import TextField from "@material-ui/core/TextField";
 class Thread extends React.Component {
   constructor(props) {
     super(props);
@@ -40,27 +42,34 @@ class Thread extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{
+        margin: "30px auto",
+        padding: "15px"
+      }}>
         <form onSubmit={this.onSubmit}>
-          <h2>Title:</h2>
+          <div>
+          <Typography component="h1" variant="h5" color="primary">Title:</Typography>
+          </div>
+          <div>
           <input
             type="text"
             name="title"
             value={this.props.title}
             onChange={this.onChange}
           />
-          <TextField
-            id="filled-multiline-flexible"
-            label="Multiline"
-            multiline
-            rowsMax="4"
+          </div>
+          <div style={{width: "200px"}}>
+        <TextAreaFieldGroup
+            name="content"
             value={this.props.content}
             onChange={this.onChange}
-            margin="normal"
-            helperText="hello"
-            variant="filled"
           />
-          <input type="submit" value="Submit" />
+          </div>
+          <div>
+          <Button type="submit" onClick={this.onSubmit} color="primary"> 
+          Post
+          </Button>
+          </div>
         </form>
       </div>
     );
