@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { isRegistered } from "../userType";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import { getThread, newComment, getComments } from "../actions/threadActions";
 
 class Thread extends React.Component {
@@ -23,7 +24,7 @@ class Thread extends React.Component {
   componentWillReceiveProps(nextProps) {
     console.log("componentWillReceiveProps");
     if (nextProps.thread.thread) {
-      //const { title, content } = nextProps.thread;
+     this.props.getComments(this.props.match.params.threadid);
     }
   }
 
@@ -31,9 +32,9 @@ class Thread extends React.Component {
     event.preventDefault();
     const thread_id = this.props.match.params.threadid;
     const author_id = this.props.auth.user.id;
-    this.props.newComment(author_id, thread_id, this.state.newCommentValue);
+    this.props.newComment(author_id, thread_id, this.state.newCommentValue,this.props.auth.user.name);
     this.toggleReply();
-    this.props.getComments(thread_id);
+    
   };
 
   toggleReply = value => {
@@ -98,4 +99,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { getThread, newComment, getComments }
-)(Thread);
+)(withRouter(Thread));

@@ -1,11 +1,11 @@
-import axios from "axios";
+import api from "../api";
 import setAuthToken from "../setAuthToken";
 import jwt_decode from "jwt-decode";
 
 import { GET_ERRORS, SET_CURRENT_USER } from "./types";
 
 export const registerUser = (userData, history) => dispatch => {
-  axios
+  api
     .post("http://localhost:8000/api/users/register", userData)
     .then(res => history.push("/login"))
     .catch(err =>
@@ -24,7 +24,7 @@ export const setCurrentUser = decoded => {
   };
 };
 export const loginUser = (userData, history) => dispatch => {
-  axios
+  api
     .post("http://localhost:8000/api/users/login", userData)
     .then(res => {
       // Save to localStorage

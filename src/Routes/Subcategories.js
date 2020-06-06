@@ -16,6 +16,7 @@ router.post("/:category", (req, res) => {
 
 router.get("/:category", (req, res) => {
   Subcategory.find().then(data => {
+    
     let subcategories = [];
     data.map(c => subcategories.push({ name: c.name, category: c.category }));
     res.json(subcategories);

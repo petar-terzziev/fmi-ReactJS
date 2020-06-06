@@ -1,9 +1,9 @@
-import axios from "axios";
+import api from "../api";
 
 import { GET_PRODUCTS, GET_ERRORS } from "./types";
 
 export const getProducts = () => dispatch => {
-  axios
+  api
     .get(`http://localhost:8000/api/products/`)
     .then(res => {
       dispatch({
@@ -20,7 +20,7 @@ export const getProducts = () => dispatch => {
 };
 
 export const postproduct = (productData, history) => dispatch => {
-  axios
+  api
     .post(`http://localhost:8000/api/products/`, productData, {
       headers: { "content-type": "multipart/form-data" }
     })

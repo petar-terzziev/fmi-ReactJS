@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const Thread = require("../Schemas/Thread");
+const auth = require("../auth");
 
-router.post("/:subcategory", (req, res) => {
+router.post("/:subcategory", auth, (req, res) => {
   const newThread = Thread({
     title: req.body.title,
     author: req.body.author,

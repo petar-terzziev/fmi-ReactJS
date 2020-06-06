@@ -1,4 +1,4 @@
-import { GET_THREAD, GET_COMMENTS } from "../actions/types";
+import { GET_THREAD, GET_COMMENTS, NEW_COMMENT} from "../actions/types";
 
 const initialState = {
   title: "",
@@ -23,6 +23,11 @@ export default function(state = initialState, action) {
         ...state,
         comments: action.payload
       };
+      case NEW_COMMENT:
+        return{
+          ...state,
+          comments: [...state.comments,action.payload]
+        }
     default:
       return state;
   }

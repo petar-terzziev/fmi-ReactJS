@@ -1,5 +1,6 @@
 const User = require("../Schemas/User.js");
 const jwt = require("jsonwebtoken");
+
 const express = require("express");
 const router = express.Router();
 
@@ -16,7 +17,9 @@ const upload = multer({ storage });
 
 router.get("/:username", (req, res) => {
   const username = req.params.username;
+  console.log(username);
   User.findOne({ username: username }).then(user => {
+    console.log(user);
     res.json(user);
   });
 });

@@ -1,8 +1,8 @@
-import axios from "axios";
+import api from "../api";
 import { SEARCH } from "./types";
 export const search = data => dispatch => {
   console.log("searching..");
-  axios
+  api
     .get(`http://localhost:8000/api/search/${data.type}/${data.value}`)
     .then(res => {
       dispatch({

@@ -5,7 +5,7 @@ const validatereg = require("../validation/register");
 const validatelogin = require("../validation/login");
 const validateprofile = require("../validation/profile");
 const jwt = require("jsonwebtoken");
-
+const config = require('config');
 router.post("/register", (req, res) => {
   const { errors, isValid } = validatereg(req.body);
   if (!isValid) {
@@ -61,10 +61,9 @@ router.post("/login", (req, res) => {
     if (password === user.password) {
       // User Matched
       const payload = { id: user.id,name: user.username, type: user.type }; // Create JWT Payload
-      const key = "secret";
 
       // Sign Token
-      jwt.sign(payload, key, { expiresIn: 3600 }, (err, token) => {
+      jwt.sign(payload, config.get('jwtSecret'), { expiresIn: 3600 }, (err, token) => {
         res.json({
           success: true,
           token: token

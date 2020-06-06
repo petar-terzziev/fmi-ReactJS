@@ -1,4 +1,4 @@
-import { GET_THREADS } from "../actions/types";
+import { GET_THREADS, NEW_THREAD } from "../actions/types";
 
 const initialState = {
   threads: []
@@ -11,6 +11,11 @@ export default function(state = initialState, action) {
         ...state,
         threads: action.payload
       };
+      case NEW_THREAD:
+        return {
+          ...state,
+          threads :[...state.threads,action.payload]
+        }
     default:
       return state;
   }

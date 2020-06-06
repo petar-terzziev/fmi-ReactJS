@@ -3,8 +3,9 @@ const router = express.Router();
 const Comment = require("../Schemas/Comment");
 const User = require("../Schemas/User");
 
+
 router.post("/:threadid", (req, res) => {
-  const newComment = Comment({
+   const newComment = Comment({
     author_id: req.body.author_id,
     content: req.body.content,
     thread_id: req.params.threadid
@@ -15,7 +16,7 @@ router.post("/:threadid", (req, res) => {
     .then(user => {
       res.json(user);
     })
-    .catch(err => console.log(err));
+    .catch(err => res.status(400).json(err));
 });
 
 router.get("/:threadid", (req, res) => {

@@ -1,10 +1,10 @@
-import axios from "axios";
+import api from "../api";
 import { NEW_SUBCATEGORY } from "./types";
-import { GET_SUBCATEGORIES } from "./types";
+import { GET_SUBCATEGORIES, LOAD_SUBCATEGORIES } from "./types";
 
 export const newSubcategory = (title, category) => dispatch => {
   const data = { title, category };
-  axios
+  api
     .post(`http://localhost:8000/api/categories/${category}`, data)
     .then(res => {})
     .catch(err =>
@@ -16,18 +16,29 @@ export const newSubcategory = (title, category) => dispatch => {
 };
 
 export const getSubcategories = handle => dispatch => {
-  axios
+  
+  dispatch({
+    type: LOAD_SUBCATEGORIES,
+    payload: {}
+  });
+  api
     .get(`http://localhost:8000/api/categories/${handle}`)
     .then(res => {
+
       dispatch({
         type: GET_SUBCATEGORIES,
         payload: res.data
       });
     })
-    .catch(err =>
+    .catch(err => {
+      
       dispatch({
         type: GET_SUBCATEGORIES,
-        payload: null
+        payload: err
       })
+    }
     );
 };
+
+
+export const getCategories = handle => dispatch => {};

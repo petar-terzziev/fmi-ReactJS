@@ -1,9 +1,9 @@
-import axios from "axios";
+import api from "../api";
 
 import { GET_PROFILE, GET_ERRORS } from "./types";
 
 export const getProfile = handle => dispatch => {
-  axios
+  api
     .get(`http://localhost:8000/api/profile/${handle}`)
     .then(res => {
       dispatch({
@@ -20,7 +20,7 @@ export const getProfile = handle => dispatch => {
 };
 
 export const editprofil = (profileData, username, history) => dispatch => {
-  axios
+  api
     .post(`http://localhost:8000/api/profile/edit/${username}`, profileData, {
       headers: { "content-type": "multipart/form-data" }
     })

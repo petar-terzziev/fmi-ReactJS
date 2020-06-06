@@ -18,6 +18,7 @@ class EditProfile extends Component {
     };
 
     this.onChange = this.onChange.bind(this);
+    this.clearprops = this.clearprops.bind(this);
   }
 
   onChange(e) {
@@ -41,6 +42,11 @@ class EditProfile extends Component {
       this.props.history
     );
   };
+
+  clearprops(e){
+    this.setState({ photo: [], descr: "" });
+  
+  }
   render() {
     return (
       <form>
@@ -90,7 +96,7 @@ class EditProfile extends Component {
             type="button"
             className="uk-button uk-button-default uk-button-large"
             style={{ float: "right" }}
-            
+            onClick={this.clearprops}
           >
             Clear
           </button>

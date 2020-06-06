@@ -31,8 +31,11 @@ class Profile extends Component {
       nextProps.profile.profile.username !== this.props.profile.profile.username
     ) {
       this.props.getProfile(this.props.match.params.username);
+      this.setState(this.props.profile.profile);
     }
+    else{
     this.setState(nextProps.profile.profile);
+    }
   }
 
   render() {
@@ -40,10 +43,7 @@ class Profile extends Component {
       this.props.match.params.username === this.props.auth.user.name;
 
     return (
-      <div style={{
-        margin: "30px auto",
-        padding: "15px"
-      }}>
+      <div>
         <Container>
           <Grid>
             <h2>

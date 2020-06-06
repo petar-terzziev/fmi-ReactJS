@@ -9,7 +9,7 @@ class Categories extends React.Component {
     return (
       <div>
         <div>
-          <Category name="Software" />
+          <Category name="Software" /> 
         </div>
         <div>
           <Category name="Hardware" />
